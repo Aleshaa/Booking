@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Booking.iml" filepath="$PROJECT_DIR$/Booking.iml" />
+      <module fileurl="file://$PROJECT_DIR$/REST_API_Booking/REST_API_Booking.iml" filepath="$PROJECT_DIR$/REST_API_Booking/REST_API_Booking.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringMVC_web_Booking/SpringMVC_web_Booking.iml" filepath="$PROJECT_DIR$/SpringMVC_web_Booking/SpringMVC_web_Booking.iml" />
     </modules>
   </component>
 </project>
