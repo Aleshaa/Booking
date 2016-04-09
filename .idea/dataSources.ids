@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - booking_db@localhost" uuid="2db45a32-9e2f-40a3-85bb-382f39e9342c">
+    <database-info product="MySQL" version="5.6.27-enterprise-commercial-advanced-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="booking_db"/>
+    <table name="picture" schema="" catalog="booking_db" type="TABLE">
+      <column name="idPicture" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="FileName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UploadedNname" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Width" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Height" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idPicture"/>
+      <exported-key name="idPicture" table="typeroom" schema="" catalog="booking_db" columns="idPicture"/>
+      <index name="idPicture_UNIQUE" unique="true" columns="idPicture"/>
+    </table>
+    <table name="reservation" schema="" catalog="booking_db" type="TABLE">
+      <column name="idReserv" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUser" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idRoom" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Check_inDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="Check_outDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="Complete" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="InterestPayment" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7"/>
+      <column name="Arrived" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="idReserv"/>
+      <foreign-key name="idRoom" columns="idRoom" ref-table="room" ref-schema="" ref-catalog="booking_db" ref-columns="idRoom" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="idUser" columns="idUser" ref-table="user" ref-schema="" ref-catalog="booking_db" ref-columns="idUser" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="idReserv" table="сheck" schema="" catalog="booking_db" columns="idReserv"/>
+      <index name="idReserv_UNIQUE" unique="true" columns="idReserv"/>
+    </table>
+    <table name="role" schema="" catalog="booking_db" type="TABLE">
+      <column name="idRole" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NameRole" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idRole"/>
+      <exported-key name="idRole" table="user" schema="" catalog="booking_db" columns="idRole"/>
+      <index name="idRole_UNIQUE" unique="true" columns="idRole"/>
+      <index name="NameRole_UNIQUE" unique="true" columns="NameRole"/>
+    </table>
+    <table name="room" schema="" catalog="booking_db" type="TABLE">
+      <column name="idRoom" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NRoom" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idTRoom" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idRoom"/>
+      <foreign-key name="idTRoom" columns="idTRoom" ref-table="typeroom" ref-schema="" ref-catalog="booking_db" ref-columns="idTRoom" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="idRoom" table="reservation" schema="" catalog="booking_db" columns="idRoom"/>
+      <index name="idRoom_UNIQUE" unique="true" columns="idRoom"/>
+      <index name="NRoom_UNIQUE" unique="true" columns="NRoom"/>
+    </table>
+    <table name="typeroom" schema="" catalog="booking_db" type="TABLE">
+      <column name="idTRoom" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NameTRoom" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Roominess" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Price" sqlType="DECIMAL" precision="64" scale="2" nullable="false" jdbcType="3"/>
+      <column name="idPicture" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idTRoom"/>
+      <foreign-key name="idPicture" columns="idPicture" ref-table="picture" ref-schema="" ref-catalog="booking_db" ref-columns="idPicture" update-rule="0" delete-rule="3" deferrability="2"/>
+      <exported-key name="idTRoom" table="room" schema="" catalog="booking_db" columns="idTRoom"/>
+      <index name="idTRoom_UNIQUE" unique="true" columns="idTRoom"/>
+    </table>
+    <table name="user" schema="" catalog="booking_db" type="TABLE">
+      <column name="idUser" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idRole" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="SecondName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FirstName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Patronymic" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Username" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DOB" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="Sex" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="PassportSeries" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PassportN" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdentificationN" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Cash" sqlType="DECIMAL" precision="64" scale="30" nullable="false" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="idUser"/>
+      <foreign-key name="idRole" columns="idRole" ref-table="role" ref-schema="" ref-catalog="booking_db" ref-columns="idRole" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="idUser" table="reservation" schema="" catalog="booking_db" columns="idUser"/>
+      <index name="IdentificationN_UNIQUE" unique="true" columns="IdentificationN"/>
+      <index name="idUser_UNIQUE" unique="true" columns="idUser"/>
+    </table>
+    <table name="сheck" schema="" catalog="booking_db" type="TABLE">
+      <column name="idСheck" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idReserv" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Payment" sqlType="DECIMAL" precision="64" scale="2" nullable="false" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="idСheck"/>
+      <foreign-key name="idReserv" columns="idReserv" ref-table="reservation" ref-schema="" ref-catalog="booking_db" ref-columns="idReserv" update-rule="0" delete-rule="3" deferrability="2"/>
+      <index name="idReserv_UNIQUE" unique="true" columns="idReserv"/>
+      <index name="idСheck_UNIQUE" unique="true" columns="idСheck"/>
+    </table>
+  </data-source>
+</component>
