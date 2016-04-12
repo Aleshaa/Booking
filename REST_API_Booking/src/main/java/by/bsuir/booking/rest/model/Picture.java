@@ -1,5 +1,7 @@
 package by.bsuir.booking.rest.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -7,6 +9,8 @@ import java.util.Collection;
  * Created by User on 09.04.2016.
  */
 @Entity
+@Table(name = "Picture")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Picture {
     private int idPicture;
     private String fileName;

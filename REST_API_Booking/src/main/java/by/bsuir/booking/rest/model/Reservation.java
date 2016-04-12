@@ -1,25 +1,28 @@
 package by.bsuir.booking.rest.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Collection;
 
 /**
  * Created by User on 09.04.2016.
  */
 @Entity
+@Table(name = "Reservation")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Reservation {
     private int idReserv;
     private int idUser;
     private int idRoom;
-    private Date checkInDate;
-    private Date checkOutDate;
+    private java.util.Date checkInDate;
+    private java.util.Date checkOutDate;
     private byte complete;
     private float interestPayment;
     private byte arrived;
     private Room roomByIdRoom;
     private User userByIdUser;
-    private Collection<—heck> ÒhecksByIdReserv;
+    private Collection<Check_r> checksByIdReserv;
 
     @Id
     @Column(name = "idReserv", nullable = false, insertable = true, updatable = true)
@@ -32,7 +35,7 @@ public class Reservation {
     }
 
     @Basic
-    @Column(name = "idUser", nullable = false, insertable = true, updatable = true)
+    @Column(name = "idUser", nullable = false, insertable = false, updatable = false)
     public int getIdUser() {
         return idUser;
     }
@@ -42,7 +45,7 @@ public class Reservation {
     }
 
     @Basic
-    @Column(name = "idRoom", nullable = false, insertable = true, updatable = true)
+    @Column(name = "idRoom", nullable = false, insertable = false, updatable = false)
     public int getIdRoom() {
         return idRoom;
     }
@@ -51,23 +54,23 @@ public class Reservation {
         this.idRoom = idRoom;
     }
 
-    @Basic
+    @Temporal(TemporalType.DATE)
     @Column(name = "Check_inDate", nullable = false, insertable = true, updatable = true)
-    public Date getCheckInDate() {
+    public java.util.Date getCheckInDate() {
         return checkInDate;
     }
 
-    public void setCheckInDate(Date checkInDate) {
+    public void setCheckInDate(java.util.Date checkInDate) {
         this.checkInDate = checkInDate;
     }
 
-    @Basic
+    @Temporal(TemporalType.DATE)
     @Column(name = "Check_outDate", nullable = false, insertable = true, updatable = true)
-    public Date getCheckOutDate() {
+    public java.util.Date getCheckOutDate() {
         return checkOutDate;
     }
 
-    public void setCheckOutDate(Date checkOutDate) {
+    public void setCheckOutDate(java.util.Date checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
@@ -154,11 +157,11 @@ public class Reservation {
     }
 
     @OneToMany(mappedBy = "reservationByIdReserv")
-    public Collection<—heck> get—hecksByIdReserv() {
-        return ÒhecksByIdReserv;
+    public Collection<Check_r> getChecksByIdReserv() {
+        return checksByIdReserv;
     }
 
-    public void set—hecksByIdReserv(Collection<—heck> ÒhecksByIdReserv) {
-        this.ÒhecksByIdReserv = ÒhecksByIdReserv;
+    public void setChecksByIdReserv(Collection<Check_r> checksByIdReserv) {
+        this.checksByIdReserv = checksByIdReserv;
     }
 }

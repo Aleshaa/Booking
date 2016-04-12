@@ -1,5 +1,7 @@
 package by.bsuir.booking.rest.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -8,6 +10,8 @@ import java.util.Collection;
  * Created by User on 09.04.2016.
  */
 @Entity
+@Table(name = "TypeRoom")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Typeroom {
     private int idTRoom;
     private String nameTRoom;
@@ -58,7 +62,7 @@ public class Typeroom {
     }
 
     @Basic
-    @Column(name = "idPicture", nullable = false, insertable = true, updatable = true)
+    @Column(name = "idPicture", nullable = false, insertable = false, updatable = false)
     public int getIdPicture() {
         return idPicture;
     }

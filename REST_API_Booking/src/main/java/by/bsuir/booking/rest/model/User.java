@@ -1,15 +1,20 @@
 package by.bsuir.booking.rest.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.Collection;
 
 /**
  * Created by User on 09.04.2016.
  */
 @Entity
-public class User {
+@Table(name = "User")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class User implements Serializable {
     private int idUser;
     private int idRole;
     private String secondName;
@@ -17,7 +22,7 @@ public class User {
     private String patronymic;
     private String username;
     private String password;
-    private Date dob;
+    private java.util.Date dob;
     private byte sex;
     private String passportSeries;
     private int passportN;
@@ -37,7 +42,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "idRole", nullable = false, insertable = true, updatable = true)
+    @Column(name = "idRole", nullable = false, insertable = false, updatable = false)
     public int getIdRole() {
         return idRole;
     }
@@ -96,13 +101,13 @@ public class User {
         this.password = password;
     }
 
-    @Basic
+    @Temporal(TemporalType.DATE)
     @Column(name = "DOB", nullable = false, insertable = true, updatable = true)
-    public Date getDob() {
+    public java.util.Date getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(java.util.Date dob) {
         this.dob = dob;
     }
 
@@ -201,6 +206,7 @@ public class User {
     }
 
     @OneToMany(mappedBy = "userByIdUser")
+    @JsonIgnore
     public Collection<Reservation> getReservationsByIdUser() {
         return reservationsByIdUser;
     }
