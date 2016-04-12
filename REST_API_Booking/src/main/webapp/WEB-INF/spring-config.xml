@@ -29,7 +29,7 @@
 				<value>by.bsuir.booking.rest.model.Room</value>
 				<value>by.bsuir.booking.rest.model.Typeroom</value>
 				<value>by.bsuir.booking.rest.model.User</value>
-				<value>by.bsuir.booking.rest.model.Сheck</value>
+				<value>by.bsuir.booking.rest.model.Check_r</value>
 			</list>
 		</property>
 		
@@ -51,6 +51,20 @@
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-	<bean id="dataDao" class="by.bsuir.booking.rest.dao.DataDaoImpl" />
-	<bean id="dataServices" class="by.bsuir.booking.rest.services.DataServicesImpl" />
+	<bean id="pictureDao" class="by.bsuir.booking.rest.dao.PictureDaoImpl" />
+	<bean id="reservationDao" class="by.bsuir.booking.rest.dao.ReservationDaoImpl" />
+	<bean id="roleDao" class="by.bsuir.booking.rest.dao.RoleDaoImpl" />
+	<bean id="roomDao" class="by.bsuir.booking.rest.dao.RoomDaoImpl" />
+	<bean id="typeRoomDao" class="by.bsuir.booking.rest.dao.TypeRoomDaoImpl" />
+	<bean id="userDao" class="by.bsuir.booking.rest.dao.UserDaoImpl" />
+	<bean id="checkDao" class="by.bsuir.booking.rest.dao.CheckDaoImpl" />
+
+	<bean id="pictureServices" class="by.bsuir.booking.rest.services.PictureServicesImpl" />
+	<bean id="reservationServices" class="by.bsuir.booking.rest.services.ReservationServicesImpl" />
+	<bean id="roleServices" class="by.bsuir.booking.rest.services.RoleServicesImpl" />
+	<bean id="roomServices" class="by.bsuir.booking.rest.services.RoomServicesImpl" />
+	<bean id="typeRoomServices" class="by.bsuir.booking.rest.services.TypeRoomServicesImpl" />
+	<bean id="userServices" class="by.bsuir.booking.rest.services.UserServicesImpl" />
+	<bean id="checkServices" class="by.bsuir.booking.rest.services.CheckServicesImpl" />
+
 </beans>

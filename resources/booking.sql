@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS `booking_db` /*!40100 DEFAULT CHARACTER SET latin1 */;  
 USE `booking_db`;  
 
-DROP TABLE IF EXISTS `Сheck`;
+DROP TABLE IF EXISTS `Check_r`;
 DROP TABLE IF EXISTS `Reservation`;
 DROP TABLE IF EXISTS `Room`;
 DROP TABLE IF EXISTS `TypeRoom`;
@@ -58,6 +58,8 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
+insert into `User` values(1,1,"Karachun","Vlados","Kirillovich","vlad228","1488","1996-06-24", true, "MP", 123, "12qweq1", 222);
+
 CREATE TABLE IF NOT EXISTS `TypeRoom` (
   `idTRoom` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NameTRoom` VARCHAR(45) NOT NULL,
@@ -103,12 +105,12 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `Сheck` (
-  `idСheck` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Check_r` (
+  `idCheck` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `idReserv` INT UNSIGNED NOT NULL,
   `Payment` DECIMAL(64,2) NOT NULL,
-  PRIMARY KEY (`idСheck`),
-  UNIQUE INDEX `idСheck_UNIQUE` (`idСheck` ASC),
+  PRIMARY KEY (`idCheck`),
+  UNIQUE INDEX `idCheck_UNIQUE` (`idCheck` ASC),
   UNIQUE INDEX `idReserv_UNIQUE` (`idReserv` ASC),
   CONSTRAINT `idReserv` FOREIGN KEY (`idReserv`) REFERENCES `Reservation` (`idReserv`) ON UPDATE CASCADE
 )
