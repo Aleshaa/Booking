@@ -6,12 +6,16 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="SpringMVC_web_Booking" />
+          <element id="module-output" name="REST_API_Booking" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Spring-4.2.5.RELEASE" />
           <element id="library" level="project" name="Spring MVC-4.2.5.RELEASE" />
+          <element id="library" level="project" name="Hibernate 4.2.2-4.2.2" />
+          <element id="library" level="project" name="Hibernate 4.0.1-4.1.1" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="REST_API_Booking/web/Web" />
     </root>
   </artifact>
 </component>

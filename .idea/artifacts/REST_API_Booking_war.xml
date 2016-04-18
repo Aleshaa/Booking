@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="REST_API_Booking:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/REST_API_Booking_war</output-path>
+    <root id="archive" name="REST_API_Booking_war.war">
+      <element id="artifact" artifact-name="REST_API_Booking:war exploded" />
+    </root>
+  </artifact>
+</component>
