@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `PassportSeries` VARCHAR(45) NOT NULL,
   `PassportN` INT(45) NOT NULL,
   `IdentificationN` VARCHAR(45) NOT NULL,
-  `Cash` DECIMAL(64,30) NOT NULL,
+  `Cash` DECIMAL(64,3) NOT NULL,
   UNIQUE INDEX `idUser_UNIQUE` (`idUser` ASC),
   UNIQUE INDEX `IdentificationN_UNIQUE` (`IdentificationN` ASC),
   CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `Role` (`idRole`) ON DELETE CASCADE ON UPDATE CASCADE,

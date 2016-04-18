@@ -1,5 +1,6 @@
 package by.bsuir.booking.rest.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -71,6 +72,7 @@ public class Room {
     }
 
     @OneToMany(mappedBy = "roomByIdRoom")
+    @JsonIgnore
     public Collection<Reservation> getReservationsByIdRoom() {
         return reservationsByIdRoom;
     }

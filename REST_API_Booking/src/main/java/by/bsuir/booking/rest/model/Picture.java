@@ -1,5 +1,6 @@
 package by.bsuir.booking.rest.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -97,6 +98,7 @@ public class Picture {
     }
 
     @OneToMany(mappedBy = "pictureByIdPicture")
+    @JsonIgnore
     public Collection<Typeroom> getTyperoomsByIdPicture() {
         return typeroomsByIdPicture;
     }
