@@ -24,10 +24,18 @@
         <processorPath useClasspath="true" />
         <module name="REST_API_Booking" />
       </profile>
+      <profile default="false" name="Annotation profile for SpringMVC_web_Booking" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="SpringMVC_web_Booking" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Booking" target="1.5" />
       <module name="REST_API_Booking" target="1.7" />
+      <module name="SpringMVC_web_Booking" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

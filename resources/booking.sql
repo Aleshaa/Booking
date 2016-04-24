@@ -33,7 +33,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO `role` VALUES(1,'admin'),(2,'user');
+INSERT INTO `role` VALUES(1,'ROLE_ADMIN'),(2,'ROLE_USER');
 
 CREATE TABLE IF NOT EXISTS `User` (
   `idUser` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -58,7 +58,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-insert into `User` values(1,1,"Karachun","Vlados","Kirillovich","vlad228","1488","1996-06-24", true, "MP", 123, "12qweq1", 222);
+insert into `User` values(1,1,"Kurganovich","Alexey","Andrevich","Admin","$2a$11$QKhTHyOS81hX2QuGdXapIe9IRv8dI3ItA48kvbbweKZf/pQAENoCG","1996-03-30", true, "MP", 3039657, "330A014PB1", 100);
 
 CREATE TABLE IF NOT EXISTS `TypeRoom` (
   `idTRoom` INT UNSIGNED NOT NULL AUTO_INCREMENT,
