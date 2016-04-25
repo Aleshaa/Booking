@@ -1,5 +1,6 @@
 package by.bsuir.booking.client.Util;
 
+import by.bsuir.booking.client.model.Typeroom;
 import by.bsuir.booking.client.model.User;
 import org.json.JSONObject;
 
@@ -88,4 +89,38 @@ public class ParseUtil {
 
         return jo;
     }
+
+    public static JSONObject parseTypeRoomToJson(Typeroom typeroom){
+        JSONObject jo = new JSONObject();
+        JSONObject joPicture = new JSONObject();
+
+        /*joPicture.put("idPicture", typeroom.getPictureByIdPicture().getIdPicture());
+        joPicture.put("fileName", typeroom.getPictureByIdPicture().getFileName());
+        jo.put("idUser", user.getIdUser());
+        jo.put("secondName", user.getSecondName());
+        jo.put("firstName", user.getFirstName());
+        jo.put("patronymic", user.getPatronymic());
+        jo.put("username", user.getUsername());
+        jo.put("password", user.getPassword());
+        jo.put("dob", parseDateToString(user.getDob()));
+        jo.put("sex", user.getSex());
+        jo.put("passportSeries", user.getPassportSeries());
+        jo.put("passportN", user.getPassportN());
+        jo.put("identificationN", user.getIdentificationN());
+        jo.put("cash", user.getCash());
+        jo.put("roleByIdRole", joRole);*/
+
+        return jo;
+    }
+
+    public static Typeroom parseJsonToTypeRoom (JSONObject obj) throws ParseException {
+
+        System.out.println(obj.toString());
+        JSONObject obj1= obj.getJSONObject("pictureByIdPicture");
+
+        Typeroom typeroom = new Typeroom(obj.getInt("idTRoom"), obj.getString("nameTRoom"), obj.getInt("roominess"), BigDecimal.valueOf(obj.getDouble("price")), obj.getInt("idPicture"), obj1);
+
+        return typeroom;
+    }
+
 }

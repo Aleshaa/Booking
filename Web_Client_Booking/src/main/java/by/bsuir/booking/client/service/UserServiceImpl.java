@@ -3,6 +3,7 @@ package by.bsuir.booking.client.service;
 import by.bsuir.booking.client.Util.ParseUtil;
 import by.bsuir.booking.client.model.Role;
 import by.bsuir.booking.client.model.User;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) throws IOException {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoleByIdRole(new Role(1,"ROLE_USER"));
+        user.setRoleByIdRole(new Role(2,"ROLE_USER"));
         URL url = new URL(SERVER_URI_USER);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
@@ -97,5 +100,63 @@ public class UserServiceImpl implements UserService {
 
         return user;
 
+    }
+
+    @Override
+    public List<User> getAllUsers() throws IOException, ParseException {
+        URL url_upd = new URL(SERVER_URI_USER + "s");
+        HttpURLConnection conn = (HttpURLConnection) url_upd.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Accept", "application/json");
+        if (conn.getResponseCode() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : "
+                    + conn.getResponseCode());
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+        String jsonData = "";
+        String output;
+        while ((output = br.readLine()) != null) {
+            jsonData += output + "\n";
+        }
+        List<User> users = new ArrayList<User>();
+        JSONArray jsonarray = new JSONArray(jsonData);
+        for (int i = 0; i < jsonarray.length(); i++) {
+            JSONObject obj = jsonarray.getJSONObject(i);
+            User user = ParseUtil.parseJsonToUser(obj);
+            users.add(user);
+        }
+        conn.disconnect();
+
+        return users;
+    }
+
+    @Override
+    public void delUser(int id) throws IOException {
+        URL url = new URL(SERVER_URI_USER+"/" + id);
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        try {
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestMethod("DELETE");
+            urlConnection.setDoOutput(true);
+            urlConnection.connect();
+            int HttpResult = urlConnection.getResponseCode();
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+                String line = null;
+                String jsonData = "";
+                while ((line = br.readLine()) != null) {
+                    jsonData += line + "\n";
+                    System.out.println(line);
+                }
+                br.close();
+            } else
+                System.out.println(urlConnection.getResponseMessage());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (urlConnection != null)
+                urlConnection.disconnect();
+        }
     }
 }
