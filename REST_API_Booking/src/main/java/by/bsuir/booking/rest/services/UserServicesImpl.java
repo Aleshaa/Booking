@@ -39,6 +39,11 @@ public class UserServicesImpl implements UserServices{
     }
 
     @Override
+    public User getUserByName(String name) throws Exception {
+        return userDao.getUserByName(name);
+    }
+
+    @Override
     public List<User> getUserList() throws Exception {
         return userDao.getUserList();
     }

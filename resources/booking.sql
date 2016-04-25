@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `FirstName` VARCHAR(45) NOT NULL,
   `Patronymic` VARCHAR(45) NOT NULL,
   `Username` VARCHAR(45) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(255) NOT NULL,
   `DOB` DATE NOT NULL,
   `Sex` boolean NOT NULL,
   `PassportSeries` VARCHAR(45) NOT NULL,
@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `IdentificationN` VARCHAR(45) NOT NULL,
   `Cash` DECIMAL(64,3) NOT NULL,
   UNIQUE INDEX `idUser_UNIQUE` (`idUser` ASC),
+  UNIQUE INDEX `Username_UNIQUE` (`Username` ASC),
   UNIQUE INDEX `IdentificationN_UNIQUE` (`IdentificationN` ASC),
   CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `Role` (`idRole`) ON DELETE CASCADE ON UPDATE CASCADE,
   PRIMARY KEY (`idUser`)
@@ -58,7 +59,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-insert into `User` values(1,1,"Kurganovich","Alexey","Andrevich","Admin","$2a$11$QKhTHyOS81hX2QuGdXapIe9IRv8dI3ItA48kvbbweKZf/pQAENoCG","1996-03-30", true, "MP", 3039657, "330A014PB1", 100);
+insert into `User` values(1,1,"Kurganovich","Alexey","Andrevich","Adminn","$2a$11$O5/3AFMwU9zodHlzKzGUH.dt5LjG12N.MsOscr3TCooImvr2ydGcm","1996-03-30", true, "MP", 3039657, "330A014PB1", 100);
 
 CREATE TABLE IF NOT EXISTS `TypeRoom` (
   `idTRoom` INT UNSIGNED NOT NULL AUTO_INCREMENT,

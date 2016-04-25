@@ -3,7 +3,6 @@ package by.bsuir.booking.rest.controller;
 import by.bsuir.booking.rest.model.*;
 import by.bsuir.booking.rest.services.*;
 import by.bsuir.booking.rest.util.Status;
-import by.bsuir.booking.rest.util.NotFoundException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -94,9 +93,29 @@ public class RestConroller {
         try {
             user = userServices.getUserById(id);
             if (user==null)
-                throw new NotFoundException(id);
+                user = new User();
         } catch (Exception e) {
             e.printStackTrace();
+            user = new User();
+            return user;
+        }
+        return user;
+    }
+
+    @RequestMapping(value = "/user/search/{name}", method = RequestMethod.GET)
+    public @ResponseBody
+    User getUserByName(@PathVariable("name") String userName) {
+        User user = null;
+        try {
+            user = userServices.getUserByName(userName);
+            if (user==null)
+                user = new User();
+            else
+                System.out.println(user.getFirstName());
+        } catch (Exception e) {
+            e.printStackTrace();
+            user = new User();
+            return user;
         }
         return user;
     }
@@ -113,6 +132,7 @@ public class RestConroller {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return employeeList;
         }
         return employeeList;
     }
@@ -196,9 +216,11 @@ public class RestConroller {
         try {
             check_r = checkServices.getCheckById(id);
             if (check_r==null)
-                throw new NotFoundException(id);
+                check_r = new Check_r();
         } catch (Exception e) {
             e.printStackTrace();
+            check_r = new Check_r();
+            return check_r;
         }
         return check_r;
     }
@@ -215,6 +237,7 @@ public class RestConroller {
             }*/
         } catch (Exception e) {
             e.printStackTrace();
+            return checkRList;
         }
         return checkRList;
     }
@@ -298,9 +321,11 @@ public class RestConroller {
         try {
             picture = pictureServices.getPictureById(id);
             if (picture==null)
-                throw new NotFoundException(id);
+                picture = new Picture();
         } catch (Exception e) {
             e.printStackTrace();
+            picture = new Picture();
+            return picture;
         }
         return picture;
     }
@@ -317,6 +342,7 @@ public class RestConroller {
             }*/
         } catch (Exception e) {
             e.printStackTrace();
+            return pictureList;
         }
         return pictureList;
     }
@@ -400,9 +426,11 @@ public class RestConroller {
         try {
             reservation = reservationServices.getReservationById(id);
             if (reservation==null)
-                throw new NotFoundException(id);
+                reservation = new Reservation();
         } catch (Exception e) {
             e.printStackTrace();
+            reservation = new Reservation();
+            return reservation;
         }
         return reservation;
     }
@@ -419,6 +447,7 @@ public class RestConroller {
             }*/
         } catch (Exception e) {
             e.printStackTrace();
+            return reservationList;
         }
         return reservationList;
     }
@@ -479,7 +508,6 @@ public class RestConroller {
         } catch (Exception e) {
             return new Status(400, e.toString());
         }
-
     }
 
     @RequestMapping(value = "/roles", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -501,9 +529,11 @@ public class RestConroller {
         try {
             role = roleServices.getRoleById(id);
             if (role==null)
-                throw new NotFoundException(id);
+                role = new Role();
         } catch (Exception e) {
             e.printStackTrace();
+            role = new Role();
+            return role;
         }
         return role;
     }
@@ -520,6 +550,7 @@ public class RestConroller {
             }*/
         } catch (Exception e) {
             e.printStackTrace();
+            return roleList;
         }
         return roleList;
     }
@@ -603,9 +634,11 @@ public class RestConroller {
         try {
             room = roomServices.getRoomById(id);
             if (room==null)
-                throw new NotFoundException(id);
+                room = new Room();
         } catch (Exception e) {
             e.printStackTrace();
+            room = new Room();
+            return room;
         }
         return room;
     }
@@ -622,6 +655,7 @@ public class RestConroller {
             }*/
         } catch (Exception e) {
             e.printStackTrace();
+            return roomList;
         }
         return roomList;
     }
@@ -705,9 +739,11 @@ public class RestConroller {
         try {
             typeroom = typeRoomServices.getTypeRoomById(id);
             if (typeroom==null)
-                throw new NotFoundException(id);
+                typeroom = new Typeroom();
         } catch (Exception e) {
             e.printStackTrace();
+            typeroom = new Typeroom();
+            return typeroom;
         }
         return typeroom;
     }
@@ -724,6 +760,7 @@ public class RestConroller {
             }*/
         } catch (Exception e) {
             e.printStackTrace();
+            return typeroomList;
         }
         return typeroomList;
     }

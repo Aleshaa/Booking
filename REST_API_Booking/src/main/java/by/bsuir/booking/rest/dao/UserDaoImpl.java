@@ -1,6 +1,7 @@
 package by.bsuir.booking.rest.dao;
 
 import by.bsuir.booking.rest.model.User;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -79,6 +80,19 @@ public class UserDaoImpl implements UserDao {
         User user = (User) session.load(User.class, new Integer(id));
         tx = session.getTransaction();
         session.beginTransaction();
+        tx.commit();
+        return user;
+    }
+
+    @Override
+    public User getUserByName(String name) throws Exception {
+        session = sessionFactory.openSession();
+        tx = session.getTransaction();
+        session.beginTransaction();
+        String hql = "FROM User U WHERE U.username = :name";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", name);
+        User user = (User) query.uniqueResult();
         tx.commit();
         return user;
     }

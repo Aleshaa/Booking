@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Booking.iml" filepath="$PROJECT_DIR$/Booking.iml" />
       <module fileurl="file://$PROJECT_DIR$/REST_API_Booking/REST_API_Booking.iml" filepath="$PROJECT_DIR$/REST_API_Booking/REST_API_Booking.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SpringMVC_web_Booking/SpringMVC_web_Booking.iml" filepath="$PROJECT_DIR$/SpringMVC_web_Booking/SpringMVC_web_Booking.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Web_Client_Booking/account.iml" filepath="$PROJECT_DIR$/Web_Client_Booking/account.iml" />
     </modules>
   </component>
 </project>

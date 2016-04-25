@@ -41,11 +41,14 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/Web_Client_Booking" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/SpringMVC_web_Booking/pom.xml" />
+        <option value="$PROJECT_DIR$/Web_Client_Booking/pom.xml" />
       </list>
     </option>
   </component>

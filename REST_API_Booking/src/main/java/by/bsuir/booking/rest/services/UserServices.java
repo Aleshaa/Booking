@@ -13,6 +13,7 @@ public interface UserServices {
     public boolean updateUser(User user) throws Exception;
     public boolean updateUsers(List<User> users) throws Exception;
     public User getUserById(int id) throws Exception;
+    public User getUserByName (String name) throws Exception;
     public List<User> getUserList() throws Exception;
     public boolean deleteUser(int id) throws Exception;
     public boolean deleteAllUsers() throws Exception;

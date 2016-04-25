@@ -15,6 +15,12 @@ import java.util.Collection;
 public class Role {
     private int idRole;
     private String nameRole;
+
+    public Role() {
+        this.nameRole = "";
+        this.idRole = 0;
+    }
+
     private Collection<User> usersByIdRole;
 
     @Id

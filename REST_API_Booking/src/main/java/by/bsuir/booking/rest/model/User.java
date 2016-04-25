@@ -2,11 +2,13 @@ package by.bsuir.booking.rest.model;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by User on 09.04.2016.
@@ -22,6 +24,7 @@ public class User implements Serializable {
     private String patronymic;
     private String username;
     private String password;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private java.util.Date dob;
     private byte sex;
     private String passportSeries;
@@ -29,6 +32,24 @@ public class User implements Serializable {
     private String identificationN;
     private BigDecimal cash;
     private Collection<Reservation> reservationsByIdUser;
+
+    public User() {
+        this.idUser = 0;
+        this.idRole = 0;
+        this.secondName = "";
+        this.firstName = "";
+        this.patronymic = "";
+        this.username = "";
+        this.password = "";
+        this.dob = new Date();
+        this.sex = 0;
+        this.passportSeries = "";
+        this.passportN = 0;
+        this.identificationN = "";
+        this.cash = BigDecimal.valueOf(0.0);
+        this.roleByIdRole = new Role();
+    }
+
     private Role roleByIdRole;
 
     @Id
