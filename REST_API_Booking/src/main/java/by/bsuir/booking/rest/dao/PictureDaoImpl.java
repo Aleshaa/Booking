@@ -2,6 +2,7 @@ package by.bsuir.booking.rest.dao;
 
 import by.bsuir.booking.rest.model.Picture;
 import by.bsuir.booking.rest.model.User;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -85,6 +86,19 @@ public class PictureDaoImpl implements PictureDao{
         session.beginTransaction();
         tx.commit();
         return picture;
+    }
+
+    @Override
+    public Picture getPictureByPath(String picture) throws Exception {
+        session = sessionFactory.openSession();
+        tx = session.getTransaction();
+        session.beginTransaction();
+        String hql = "FROM Picture P WHERE P.fileName = :picture";
+        Query query = session.createQuery(hql);
+        query.setParameter("picture", picture);
+        Picture pic = (Picture) query.uniqueResult();
+        tx.commit();
+        return pic;
     }
 
     @SuppressWarnings("unchecked")

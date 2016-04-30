@@ -11,9 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 
-/**
- * Created by User on 24.04.2016.
- */
 @Service
 public class RoleServiceImpl implements RoleService {
     public static final String SERVER_URI_ROLE = "http://localhost:8080/rest/role/";

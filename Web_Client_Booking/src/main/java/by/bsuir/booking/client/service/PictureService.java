@@ -12,6 +12,8 @@ public interface PictureService {
 
     Picture getPictureByID(int id) throws IOException, ParseException;
 
+    Picture findPicByPath(String path) throws IOException, ParseException;
+
     void save(Picture picture) throws IOException;
 
 }

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Типы номеров</title>
+  <title>Список номеров</title>
   <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
   <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 
@@ -16,22 +16,29 @@
 
 <%@include file="navibar.jsp"%>
 
+<!-- container -->
 <div class="container" align="center">
-  <h1>Список типов номеров</h1>
-  <div class="row">
-    <c:forEach var="tr" items="${listTR}" varStatus="status">
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="${contextPath}/resources/img/${tr.pictureByIdPicture}" alt="...">
-          <div class="caption">
-            <h3>${tr.nameTRoom}</h3>
-            <p>Вместительность: ${tr.roominess} человек<br><br/> Цена: ${tr.price} </p>
-            <p><a href="${contextPath}/deleteTR?id=${tr.idTRoom}" class="btn btn-primary" role="button">Удалить</a> <a href="${contextPath}/trEdit?id=${tr.idTRoom}" class="btn btn-default" role="button">Редактировать</a></p>
-          </div>
-        </div>
-      </div>
+  <h1>Список комнат</h1>
+  <table class="table">
+    <th>ID</th>
+    <th>Номер комнаты</th>
+    <th>Тип комнаты</th>
+    <th>Вид</th>
+
+    <c:forEach var="room" items="${listRoom}" varStatus="status">
+      <tr>
+          <td>${room.idRoom}</td>
+          <td>${room.nRoom}</td>
+          <td>${room.typeroomByIdTRoomTR.nameTRoom}</td>
+          <td><img src="${contextPath}/resources/img/${room.typeroomByIdTRoomTR.pictureByIdPicture}" alt="..."></td>
+          <td>
+            <a href="deleteRoom?id=${room.idRoom}">Удалить</a>
+            <a href="${contextPath}/roomEdit?id=${room.idRoom}">Редактировать</a>
+          </td>
+
+      </tr>
     </c:forEach>
-  </div>
+  </table>
 </div>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

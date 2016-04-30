@@ -44,6 +44,11 @@ public class TypeRoomServicesImpl implements TypeRoomServices{
     }
 
     @Override
+    public Typeroom getTypeRoomByName(String name) throws Exception {
+        return typeRoomDao.getTypeRoomByName(name);
+    }
+
+    @Override
     public boolean deleteTypeRoom(int id) throws Exception {
         return typeRoomDao.deleteTypeRoom(id);
     }

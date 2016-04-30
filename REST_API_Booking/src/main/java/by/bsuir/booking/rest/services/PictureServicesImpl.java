@@ -40,6 +40,11 @@ public class PictureServicesImpl implements PictureServices {
     }
 
     @Override
+    public Picture getPictureByPath(String path) throws Exception {
+        return pictureDao.getPictureByPath(path);
+    }
+
+    @Override
     public List<Picture> getPictureList() throws Exception {
         return pictureDao.getPictureList();
     }

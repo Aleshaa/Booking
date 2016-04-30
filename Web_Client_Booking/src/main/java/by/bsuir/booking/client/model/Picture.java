@@ -18,6 +18,10 @@ public class Picture {
         this.height = height;
     }
 
+    public Picture() {
+
+    }
+
     public int getIdPicture() {
         return idPicture;
     }

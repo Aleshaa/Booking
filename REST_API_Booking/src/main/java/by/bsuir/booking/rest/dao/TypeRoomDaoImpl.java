@@ -1,6 +1,7 @@
 package by.bsuir.booking.rest.dao;
 
 import by.bsuir.booking.rest.model.Typeroom;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -45,6 +46,7 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
 
     @Override
     public boolean updateTypeRoom(Typeroom typeRoom) throws Exception {
+        System.out.println("TEST UPDATE TR");
         session = sessionFactory.openSession();
         Typeroom typeRoom1;
         typeRoom1 = (Typeroom) session.load(Typeroom.class, typeRoom.getIdTRoom());
@@ -81,6 +83,19 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
         session.beginTransaction();
         tx.commit();
         return typeRoom;
+    }
+
+    @Override
+    public Typeroom getTypeRoomByName(String name) throws Exception {
+        session = sessionFactory.openSession();
+        tx = session.getTransaction();
+        session.beginTransaction();
+        String hql = "FROM Typeroom t WHERE t.nameTRoom = :name";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", name);
+        Typeroom tr = (Typeroom) query.uniqueResult();
+        tx.commit();
+        return tr;
     }
 
     @SuppressWarnings("unchecked")

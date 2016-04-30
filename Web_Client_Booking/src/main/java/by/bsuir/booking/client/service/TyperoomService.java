@@ -10,9 +10,14 @@ import java.util.List;
  * Created by User on 25.04.2016.
  */
 public interface TyperoomService {
-    void save(Typeroom typeroom) throws IOException;
+
+    void save(Typeroom typeroom) throws IOException, ParseException;
+
+    void update(Typeroom typeroom) throws IOException, ParseException;
 
     Typeroom getTypeRoomByID(int id) throws IOException, ParseException;
+
+    Typeroom getTypeRoomByName(String name) throws IOException, ParseException;
 
     List<Typeroom> getAllTypeRoom() throws IOException, ParseException;
 

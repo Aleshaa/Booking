@@ -1,5 +1,6 @@
 package by.bsuir.booking.client.model;
 
+import by.bsuir.booking.client.Util.ParseUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONObject;
@@ -7,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -116,11 +118,17 @@ public class User implements Serializable {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public java.util.Date getDob() {
-        return dob;
+    public String getDob() {
+        return ParseUtil.parseDateToString(dob);
     }
 
-    public void setDob(java.util.Date dob) {
+    public java.util.Date getDobDate() { return dob; }
+
+    public void setDob(String dob) throws ParseException {
+        this.dob = ParseUtil.parseStringToDate(dob);
+    }
+
+    public void setDobDate(java.util.Date dob) throws ParseException {
         this.dob = dob;
     }
 

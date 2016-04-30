@@ -14,6 +14,7 @@ public interface TypeRoomServices {
     public boolean updateTypesRoom(List<Typeroom> typesRoom) throws Exception;
     public Typeroom getTypeRoomById(int id) throws Exception;
     public List<Typeroom> getTypeRoomList() throws Exception;
+    public Typeroom getTypeRoomByName(String name) throws Exception;
     public boolean deleteTypeRoom(int id) throws Exception;
     public boolean deleteAllTypesRoom() throws Exception;
 }

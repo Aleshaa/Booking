@@ -1,5 +1,6 @@
 package by.bsuir.booking.client.Util;
 
+import by.bsuir.booking.client.model.Room;
 import by.bsuir.booking.client.model.Typeroom;
 import by.bsuir.booking.client.model.User;
 import org.json.JSONObject;
@@ -9,10 +10,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by User on 24.04.2016.
- */
 public class ParseUtil {
+    //***PARSE DATE***
     public static String parseDateToString(Date date){
         System.out.println("(parseDateToString)Date: " + date);
         String result;
@@ -51,7 +50,8 @@ public class ParseUtil {
     public static long parseDateToLong(Date date){
         return date.getTime();
     }
-
+    //******
+    //**PARSE USER***
     public static User parseJsonToUser (JSONObject obj) throws ParseException {
 
         System.out.println(obj.toString());
@@ -79,7 +79,7 @@ public class ParseUtil {
         jo.put("patronymic", user.getPatronymic());
         jo.put("username", user.getUsername());
         jo.put("password", user.getPassword());
-        jo.put("dob", parseDateToString(user.getDob()));
+        jo.put("dob", parseDateToString(user.getDobDate()));
         jo.put("sex", user.getSex());
         jo.put("passportSeries", user.getPassportSeries());
         jo.put("passportN", user.getPassportN());
@@ -89,26 +89,48 @@ public class ParseUtil {
 
         return jo;
     }
+    //******
+    //***PARSE ROOM***
+    public static Room parseJsonToRoom (JSONObject obj) throws ParseException {
 
+        System.out.println(obj.toString());
+        JSONObject TRobj= obj.getJSONObject("typeroomByIdTRoom");
+
+
+        Room room = new Room(obj.getInt("idRoom"), obj.getInt("nRoom"), obj.getInt("idTRoom"), parseJsonToTypeRoom(TRobj));
+
+        return room;
+    }
+
+    public static JSONObject parseRoomToJson(Room room){
+
+        JSONObject jo = new JSONObject();
+        JSONObject joTypeRoom = parseTypeRoomToJson(room.getTyperoomByIdTRoomTR());
+
+        jo.put("idRoom", room.getIdRoom());
+        jo.put("nRoom", room.getnRoom());
+        jo.put("idTRoom", room.getIdTRoom());
+        jo.put("typeroomByIdTRoom", joTypeRoom);
+
+        return jo;
+    }
+    //******
+    //***PARSE ROOM TYPE***
     public static JSONObject parseTypeRoomToJson(Typeroom typeroom){
         JSONObject jo = new JSONObject();
         JSONObject joPicture = new JSONObject();
 
-        /*joPicture.put("idPicture", typeroom.getPictureByIdPicture().getIdPicture());
-        joPicture.put("fileName", typeroom.getPictureByIdPicture().getFileName());
-        jo.put("idUser", user.getIdUser());
-        jo.put("secondName", user.getSecondName());
-        jo.put("firstName", user.getFirstName());
-        jo.put("patronymic", user.getPatronymic());
-        jo.put("username", user.getUsername());
-        jo.put("password", user.getPassword());
-        jo.put("dob", parseDateToString(user.getDob()));
-        jo.put("sex", user.getSex());
-        jo.put("passportSeries", user.getPassportSeries());
-        jo.put("passportN", user.getPassportN());
-        jo.put("identificationN", user.getIdentificationN());
-        jo.put("cash", user.getCash());
-        jo.put("roleByIdRole", joRole);*/
+        joPicture.put("idPicture", typeroom.getPictureByIdPic().getIdPicture());
+        joPicture.put("fileName", typeroom.getPictureByIdPic().getFileName());
+        joPicture.put("width", typeroom.getPictureByIdPic().getWidth());
+        joPicture.put("height", typeroom.getPictureByIdPic().getHeight());
+        joPicture.put("uploadedNname", typeroom.getPictureByIdPic().getUploadedNname());
+        jo.put("idTRoom", typeroom.getIdTRoom());
+        jo.put("nameTRoom", typeroom.getNameTRoom());
+        jo.put("roominess", typeroom.getRoominess());
+        jo.put("price", typeroom.getPrice());
+        jo.put("idPicture", typeroom.getPictureByIdPic().getIdPicture());
+        jo.put("pictureByIdPicture", joPicture);
 
         return jo;
     }
@@ -122,5 +144,5 @@ public class ParseUtil {
 
         return typeroom;
     }
-
+    //*******
 }

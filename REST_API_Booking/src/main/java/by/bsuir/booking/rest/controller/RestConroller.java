@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/rest")
+@RequestMapping("/")
 public class RestConroller {
 
     @Autowired
@@ -322,6 +322,24 @@ public class RestConroller {
             picture = pictureServices.getPictureById(id);
             if (picture==null)
                 picture = new Picture();
+        } catch (Exception e) {
+            e.printStackTrace();
+            picture = new Picture();
+            return picture;
+        }
+        return picture;
+    }
+
+    @RequestMapping(value = "/picture/search/{name}", method = RequestMethod.GET)
+    public @ResponseBody
+    Picture getPictureByPath(@PathVariable("name") String name) {
+        Picture picture = null;
+        try {
+            picture = pictureServices.getPictureByPath(name);
+            if (picture==null)
+                picture = new Picture();
+            else
+                System.out.println(picture.getUploadedNname());
         } catch (Exception e) {
             e.printStackTrace();
             picture = new Picture();
@@ -660,6 +678,25 @@ public class RestConroller {
         return roomList;
     }
 
+    @RequestMapping(value = "/typeroom/search/{name}", method = RequestMethod.GET)
+    public @ResponseBody
+    Typeroom getTRByName(@PathVariable("name") String name) {
+        Typeroom tr = null;
+        try {
+            System.out.println("REST:TEST GET TR BY NAME: " + name);
+            tr = typeRoomServices.getTypeRoomByName(name);
+            if (tr==null)
+                tr = new Typeroom();
+            else
+                System.out.println(tr.getNameTRoom());
+        } catch (Exception e) {
+            e.printStackTrace();
+            tr = new Typeroom();
+            return tr;
+        }
+        return tr;
+    }
+
     @RequestMapping(value = "/rooms", method = RequestMethod.DELETE)
     public @ResponseBody
     Status delRooms() {
@@ -712,6 +749,7 @@ public class RestConroller {
     public @ResponseBody
     Status updTRoom(@RequestBody Typeroom typeroom) {
         try {
+            System.out.println("TEST UPDATE CONTROL " + typeroom.getIdTRoom());
             typeRoomServices.updateTypeRoom(typeroom);
             return new Status(200, "TypeRoom update Successfully !");
         } catch (Exception e) {

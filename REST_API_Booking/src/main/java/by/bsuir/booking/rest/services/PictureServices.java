@@ -13,6 +13,7 @@ public interface PictureServices {
     public boolean updatePicture(Picture picture) throws Exception;
     public boolean updatePictures(List<Picture> pictures) throws Exception;
     public Picture getPictureById(int id) throws Exception;
+    public Picture getPictureByPath (String path) throws Exception;
     public List<Picture> getPictureList() throws Exception;
     public boolean deletePicture(int id) throws Exception;
     public boolean deleteAllPictures() throws Exception;

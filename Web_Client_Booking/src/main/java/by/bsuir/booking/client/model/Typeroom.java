@@ -3,10 +3,13 @@ package by.bsuir.booking.client.model;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.ParseException;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Typeroom {
+
     private int idTRoom;
     private String nameTRoom;
     private int roominess;
@@ -21,6 +24,19 @@ public class Typeroom {
         this.price = price;
         this.idPicture = idPicture;
         this.pictureByIdPicture = new Picture(obj1.getInt("idPicture"), obj1.getString("fileName"), obj1.getString("uploadedNname"),obj1.getInt("width"), obj1.getInt("height"));
+    }
+
+    public Typeroom(int idTRoom, String nameTRoom, int roominess, BigDecimal price, int idPicture) {
+        this.idTRoom = idTRoom;
+        this.nameTRoom = nameTRoom;
+        this.roominess = roominess;
+        this.price = price;
+        this.idPicture = idPicture;
+        this.pictureByIdPicture = new Picture();
+    }
+
+    public Typeroom() {
+
     }
 
     public int getIdTRoom() {
@@ -90,12 +106,18 @@ public class Typeroom {
     }
 
 
-    public Picture getPictureByIdPicture() {
+    public String getPictureByIdPicture() {
+        return (pictureByIdPicture == null) ? "" : pictureByIdPicture.getUploadedNname();
+    }
+
+    public Picture getPictureByIdPic() {
         return pictureByIdPicture;
     }
 
-    public void setPictureByIdPicture(Picture pictureByIdPicture) {
-        this.pictureByIdPicture = pictureByIdPicture;
+
+    public void setPictureByIdPicture(String path) throws IOException, ParseException {
+        Picture pic = new Picture(0,path.replaceAll(".jpg","").trim(),path,1,1);
+        this.pictureByIdPicture = pic;
     }
 }
 
