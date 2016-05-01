@@ -13,9 +13,9 @@ public interface RoomService {
 
     void update(Room room) throws IOException, ParseException;
 
-    Room findRoomByN(String username) throws IOException, ParseException;
-
     Room getRoomByID(int id) throws IOException, ParseException;
+
+    Room getByRoomN(int id) throws IOException, ParseException;
 
     List<Room> getAllRooms() throws IOException, ParseException;
 

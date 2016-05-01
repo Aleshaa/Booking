@@ -103,6 +103,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByID(int id) throws IOException, ParseException {
+        URL url_upd = new URL(SERVER_URI_USER + "/" + id);
+        HttpURLConnection conn = (HttpURLConnection) url_upd.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Accept", "application/json");
+        if (conn.getResponseCode() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : "
+                    + conn.getResponseCode());
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+        String jsonData = "";
+        String output;
+        while ((output = br.readLine()) != null) {
+            jsonData += output + "\n";
+        }
+
+        System.out.println(jsonData);
+
+        JSONObject obj = new JSONObject(jsonData);
+
+        User user = ParseUtil.parseJsonToUser(obj);
+
+        System.out.println(user.getSecondName());
+        System.out.println(user.getUsername());
+        System.out.println(user.getIdRole());
+
+        conn.disconnect();
+
+        return user;
+    }
+
+    @Override
     public List<User> getAllUsers() throws IOException, ParseException {
         URL url_upd = new URL(SERVER_URI_USER + "s");
         HttpURLConnection conn = (HttpURLConnection) url_upd.openConnection();

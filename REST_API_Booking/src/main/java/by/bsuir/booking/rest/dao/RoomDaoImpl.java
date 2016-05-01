@@ -1,6 +1,7 @@
 package by.bsuir.booking.rest.dao;
 
 import by.bsuir.booking.rest.model.Room;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -82,6 +83,19 @@ public class RoomDaoImpl implements RoomDao{
         session.beginTransaction();
         tx.commit();
         return room;
+    }
+
+    @Override
+    public Room getRoomByN(int N) throws Exception {
+        session = sessionFactory.openSession();
+        tx = session.getTransaction();
+        session.beginTransaction();
+        String hql = "FROM Room R WHERE R.nRoom = :N";
+        Query query = session.createQuery(hql);
+        query.setParameter("N", N);
+        Room user = (Room) query.uniqueResult();
+        tx.commit();
+        return user;
     }
 
     @SuppressWarnings("unchecked")

@@ -31,16 +31,18 @@
           <td>${room.nRoom}</td>
           <td>${room.typeroomByIdTRoomTR.nameTRoom}</td>
           <td><img src="${contextPath}/resources/img/${room.typeroomByIdTRoomTR.pictureByIdPicture}" alt="..."></td>
-          <td>
-            <a href="deleteRoom?id=${room.idRoom}">Удалить</a>
-            <a href="${contextPath}/roomEdit?id=${room.idRoom}">Редактировать</a>
-          </td>
-
+          <security:authorize access="hasRole('ROLE_ADMIN')">
+              <td>
+                <a href="deleteRoom?id=${room.idRoom}">Удалить</a>
+                <a href="${contextPath}/roomEdit?id=${room.idRoom}">Редактировать</a>
+              </td>
+          </security:authorize>
       </tr>
     </c:forEach>
   </table>
 </div>
 <!-- /container -->
+<%@include file="footer.jsp"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>

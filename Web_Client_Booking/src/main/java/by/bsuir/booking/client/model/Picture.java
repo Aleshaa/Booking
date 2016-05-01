@@ -19,7 +19,11 @@ public class Picture {
     }
 
     public Picture() {
-
+        this.idPicture = 0;
+        this.fileName = "";
+        this.uploadedNname = "";
+        this.width = 0;
+        this.height = 0;
     }
 
     public int getIdPicture() {

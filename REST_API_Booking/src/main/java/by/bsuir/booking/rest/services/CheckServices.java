@@ -4,9 +4,6 @@ import by.bsuir.booking.rest.model.Check_r;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
 public interface CheckServices {
     public boolean addCheck(Check_r check) throws Exception;
     public boolean addChecks(List<Check_r> checks) throws Exception;

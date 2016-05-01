@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Добавить тип комнат</title>
+  <title>Редактировать бронь</title>
 
   <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
   <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -31,48 +31,69 @@
 <body>
 
 <%@include file="navibar.jsp"%>
+<%@include file="navibar.jsp"%>
 
 <div class="container">
 
-  <form:form method="POST" modelAttribute="trForm" class="form-signin">
-    <h2 class="form-signin-heading">Создать новый тип комнат в отеле</h2>
-    <spring:bind path="idTRoom">
-        <form:input type="hidden" path="idTRoom" class="form-control" placeholder="Название типа"
-                    autofocus="true"></form:input>
+  <form:form method="POST" modelAttribute="reservForm" class="form-signin">
+    <h2 class="form-signin-heading">Комната</h2>
+    <spring:bind path="idReserv">
+      <form:input type="hidden" path="idReserv" class="form-control" autofocus="true"></form:input>
     </spring:bind>
-    <spring:bind path="nameTRoom">
+    <spring:bind path="interestPayment">
+      <form:input type="hidden" path="interestPayment" class="form-control" autofocus="true"></form:input>
+    </spring:bind>
+    <spring:bind path="idUser">
+      <form:input type="hidden" path="idUser" class="form-control" autofocus="true"></form:input>
+    </spring:bind>
+    <spring:bind path="roomByIdRoom">
       <div class="form-group ${status.error ? 'has-error' : ''}">
-        <form:input type="text" path="nameTRoom" class="form-control" placeholder="Название типа"
-                    autofocus="true"></form:input>
-        <form:errors path="nameTRoom"></form:errors>
+        <form:select path="roomByIdRoom" class="form-control">
+          <c:forEach items = "${RoomList}" var="tr">
+            <form:option value="${tr.nRoom}">${tr.nRoom}</form:option>
+          </c:forEach>
+        </form:select>
       </div>
     </spring:bind>
 
-    <spring:bind path="roominess">
+    <spring:bind path="checkInDate">
       <div class="form-group ${status.error ? 'has-error' : ''}">
-        <form:input type="text" path="roominess" class="form-control" placeholder="Вместительность"></form:input>
-        <form:errors path="roominess"></form:errors>
+        <form:input type="text" path="checkInDate" class="form-control" placeholder="Дата заезда"
+                    autofocus="true"></form:input>
+        <form:errors path="checkInDate"></form:errors>
       </div>
     </spring:bind>
 
-    <spring:bind path="price">
+    <spring:bind path="checkOutDate">
       <div class="form-group ${status.error ? 'has-error' : ''}">
-        <form:input type="text" path="price" class="form-control"
-                    placeholder="Стоимость в сутки"></form:input>
-        <form:errors path="price"></form:errors>
-      </div>
-    </spring:bind>
-    <spring:bind path="pictureByIdPicture">
-      <div class="form-group ${status.error ? 'has-error' : ''}">
-        <form:input type="file" path="pictureByIdPicture" class="form-control" placeholder="Путь к картинке"
+        <form:input type="text" path="checkOutDate" class="form-control" placeholder="Дата выезда"
                     autofocus="true"></form:input>
-        <form:errors path="pictureByIdPicture"></form:errors>
+        <form:errors path="checkOutDate"></form:errors>
       </div>
     </spring:bind>
+
+    <spring:bind path="complete">
+      <div class="form-group ${status.error ? 'has-error' : ''}">
+        <form:select path="complete" class="form-control">
+            <form:option value="0">Не оплачено</form:option>
+            <form:option value="1">Оплачено</form:option>
+        </form:select>
+      </div>
+    </spring:bind>
+
+    <spring:bind path="arrived">
+      <div class="form-group ${status.error ? 'has-error' : ''}">
+        <form:select path="arrived" class="form-control">
+          <form:option value="0">Не прибыл</form:option>
+          <form:option value="1">Прибыл</form:option>
+        </form:select>
+      </div>
+    </spring:bind>
+
     <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     <br><br/>
     <div class="text-center">
-      <a href="${contextPath}/trList" class="btn btn-primary" role="button">Cancel</a>
+      <a href="${contextPath}/reservList" class="btn btn-primary" role="button">Cancel</a>
     </div>
   </form:form>
 

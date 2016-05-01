@@ -12,6 +12,8 @@ public interface UserService {
 
     User findByUsername(String username) throws IOException, ParseException;
 
+    User getByID(int id) throws IOException, ParseException;
+
     List<User> getAllUsers() throws IOException, ParseException;
 
     void delUser(int id) throws IOException;

@@ -80,6 +80,6 @@ public class RoomListController {
     public ModelAndView deleteContact(HttpServletRequest request) throws IOException {
         int RoomID = Integer.parseInt(request.getParameter("id"));
         roomService.delRoom(RoomID);
-        return new ModelAndView("redirect:/romList");
+        return new ModelAndView("redirect:/roomList");
     }
 }

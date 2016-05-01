@@ -2,7 +2,6 @@ package by.bsuir.booking.client.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
 /* Model Check */
@@ -11,7 +10,14 @@ public class Check_r {
     private int idCheck;
     private int idReserv;
     private BigDecimal payment;
-    private Reservation reservationByIdReserv;
+    //private Reservation reservationByIdReserv;
+
+    public Check_r(int idCheck, int idReserv, BigDecimal payment) {
+        this.idCheck = idCheck;
+        this.idReserv = idReserv;
+        this.payment = payment;
+        //this.reservationByIdReserv = reservationByIdReserv;
+    }
 
     public int getIdCheck() {
         return idCheck;
@@ -59,13 +65,12 @@ public class Check_r {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idReserv", referencedColumnName = "idReserv", nullable = false)
-    public Reservation getReservationByIdReserv() {
+
+    /*public Reservation getReservationByIdReserv() {
         return reservationByIdReserv;
     }
 
     public void setReservationByIdReserv(Reservation reservationByIdReserv) {
         this.reservationByIdReserv = reservationByIdReserv;
-    }
+    }*/
 }

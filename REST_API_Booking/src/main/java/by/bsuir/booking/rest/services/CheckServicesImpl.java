@@ -10,6 +10,7 @@ import java.util.List;
  * Created by User on 11.04.2016.
  */
 public class CheckServicesImpl implements CheckServices{
+
     @Autowired
     CheckDao checkDao;
 

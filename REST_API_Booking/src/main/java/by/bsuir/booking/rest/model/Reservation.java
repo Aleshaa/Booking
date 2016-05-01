@@ -1,10 +1,8 @@
 package by.bsuir.booking.rest.model;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 /**
  * Created by User on 09.04.2016.
@@ -23,7 +21,7 @@ public class Reservation {
     private byte arrived;
     private Room roomByIdRoom;
     private User userByIdUser;
-    private Collection<Check_r> checksByIdReserv;
+    //private Collection<Check_r> checksByIdReserv;
 
     @Id
     @Column(name = "idReserv", nullable = false, insertable = true, updatable = true)
@@ -157,7 +155,7 @@ public class Reservation {
         this.userByIdUser = userByIdUser;
     }
 
-    @OneToMany(mappedBy = "reservationByIdReserv")
+    /*@OneToMany(mappedBy = "reservationByIdReserv")
     @JsonIgnore
     public Collection<Check_r> getChecksByIdReserv() {
         return checksByIdReserv;
@@ -165,5 +163,5 @@ public class Reservation {
 
     public void setChecksByIdReserv(Collection<Check_r> checksByIdReserv) {
         this.checksByIdReserv = checksByIdReserv;
-    }
+    }*/
 }

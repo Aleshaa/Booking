@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
 public class RoomServicesImpl implements RoomServices {
     @Autowired
     RoomDao roomDao;
@@ -36,6 +33,11 @@ public class RoomServicesImpl implements RoomServices {
     @Override
     public Room getRoomById(int id) throws Exception {
         return roomDao.getRoomById(id);
+    }
+
+    @Override
+    public Room getRoomByN(int N) throws Exception {
+        return roomDao.getRoomByN(N);
     }
 
     @Override

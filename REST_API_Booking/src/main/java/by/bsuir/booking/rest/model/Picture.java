@@ -20,6 +20,14 @@ public class Picture {
     private int height;
     private Collection<Typeroom> typeroomsByIdPicture;
 
+    public Picture() {
+        this.idPicture = 0;
+        this.fileName = "";
+        this.uploadedNname = "";
+        this.width = 0;
+        this.height = 0;
+    }
+
     @Id
     @Column(name = "idPicture", nullable = false, insertable = true, updatable = true)
     public int getIdPicture() {

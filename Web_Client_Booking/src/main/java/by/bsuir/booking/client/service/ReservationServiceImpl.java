@@ -1,7 +1,7 @@
 package by.bsuir.booking.client.service;
 
 import by.bsuir.booking.client.Util.ParseUtil;
-import by.bsuir.booking.client.model.Room;
+import by.bsuir.booking.client.model.Reservation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,13 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RoomServiceImpl implements RoomService{
+public class ReservationServiceImpl implements ReservationService {
 
-    public static final String SERVER_URI_ROOM = "http://localhost:8080/rest/room";
+    public static final String SERVER_URI_RESERVATION = "http://localhost:8080/rest/reservation";
 
     @Override
-    public void save(Room room) throws IOException {
-        URL url = new URL(SERVER_URI_ROOM);
+    public void save(Reservation reservation) throws IOException {
+        URL url = new URL(SERVER_URI_RESERVATION);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -32,9 +32,9 @@ public class RoomServiceImpl implements RoomService{
             urlConnection.setDoOutput(true);
             urlConnection.connect();
 
-            JSONObject jo = ParseUtil.parseRoomToJson(room);
+            JSONObject jo = ParseUtil.parseReservationToJson(reservation);
 
-            System.out.println(jo.toString());
+            System.out.println("Reservation save: " + jo.toString());
             OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
             out.write(jo.toString());
             out.close();
@@ -61,8 +61,8 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public void update(Room room) throws IOException, ParseException {
-        URL url = new URL(SERVER_URI_ROOM + "/" + room.getIdRoom());
+    public void update(Reservation reservation) throws IOException, ParseException {
+        URL url = new URL(SERVER_URI_RESERVATION + "/" + reservation.getIdReserv());
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -71,9 +71,9 @@ public class RoomServiceImpl implements RoomService{
             urlConnection.connect();
 
             JSONObject jo = new JSONObject();
-            jo = ParseUtil.parseRoomToJson(room);
+            jo = ParseUtil.parseReservationToJson(reservation);
 
-            System.out.println(jo.toString());
+            System.out.println("Reservation update: " + jo.toString());
             OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
             out.write(jo.toString());
             out.close();
@@ -99,10 +99,9 @@ public class RoomServiceImpl implements RoomService{
         }
     }
 
-
     @Override
-    public Room getRoomByID(int id) throws IOException, ParseException {
-        URL url_upd = new URL(SERVER_URI_ROOM + "/" + id);
+    public Reservation getReservationByID(int id) throws IOException, ParseException {
+        URL url_upd = new URL(SERVER_URI_RESERVATION + "/" + id);
         HttpURLConnection conn = (HttpURLConnection) url_upd.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Accept", "application/json");
@@ -121,16 +120,16 @@ public class RoomServiceImpl implements RoomService{
 
         JSONObject obj = new JSONObject(jsonData);
 
-        Room room = ParseUtil.parseJsonToRoom(obj);
+        Reservation reservation = ParseUtil.parseJsonToReservation(obj);
 
         conn.disconnect();
 
-        return room;
+        return reservation;
     }
 
     @Override
-    public Room getByRoomN(int N) throws IOException, ParseException {
-        URL url_upd = new URL(SERVER_URI_ROOM + "/search/" + N);
+    public List<Reservation> getAll() throws IOException, ParseException {
+        URL url_upd = new URL(SERVER_URI_RESERVATION + "s");
         HttpURLConnection conn = (HttpURLConnection) url_upd.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Accept", "application/json");
@@ -144,49 +143,21 @@ public class RoomServiceImpl implements RoomService{
         while ((output = br.readLine()) != null) {
             jsonData += output + "\n";
         }
-
-        System.out.println(jsonData);
-
-        JSONObject obj = new JSONObject(jsonData);
-
-        Room room = ParseUtil.parseJsonToRoom(obj);
-
-        conn.disconnect();
-
-        return room;
-    }
-
-    @Override
-    public List<Room> getAllRooms() throws IOException, ParseException {
-        URL url_upd = new URL(SERVER_URI_ROOM + "s");
-        HttpURLConnection conn = (HttpURLConnection) url_upd.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Accept", "application/json");
-        if (conn.getResponseCode() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + conn.getResponseCode());
-        }
-        BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-        String jsonData = "";
-        String output;
-        while ((output = br.readLine()) != null) {
-            jsonData += output + "\n";
-        }
-        List<Room> rooms = new ArrayList<Room>();
+        List<Reservation> reservations = new ArrayList<Reservation>();
         JSONArray jsonarray = new JSONArray(jsonData);
         for (int i = 0; i < jsonarray.length(); i++) {
             JSONObject obj = jsonarray.getJSONObject(i);
-            Room room = ParseUtil.parseJsonToRoom(obj);
-            rooms.add(room);
+            Reservation reservation = ParseUtil.parseJsonToReservation(obj);
+            reservations.add(reservation);
         }
         conn.disconnect();
 
-        return rooms;
+        return reservations;
     }
 
     @Override
-    public void delRoom(int id) throws IOException {
-        URL url = new URL(SERVER_URI_ROOM + "/" + id);
+    public void delete(int id) throws IOException {
+        URL url = new URL(SERVER_URI_RESERVATION + "/" + id);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             urlConnection.setRequestProperty("Content-Type", "application/json");

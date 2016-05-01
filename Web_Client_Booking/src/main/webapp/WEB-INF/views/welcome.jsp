@@ -17,6 +17,7 @@
     <title>Create an account</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -29,26 +30,27 @@
 <%@include file="navibar.jsp"%>
 
 <div class="container">
+    <div class="text-center">
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
 
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
+            <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+            <security:authorize access="hasRole('ROLE_USER')">
+                This text is only visible to a user
+                <br/>
+            </security:authorize>
+            <security:authorize access="hasRole('ROLE_ADMIN')">
+                This text is only visible to an admin
+                <br/>
+            </security:authorize>
 
-        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
-        <security:authorize access="hasRole('ROLE_USER')">
-            This text is only visible to a user
-            <br/>
-        </security:authorize>
-        <security:authorize access="hasRole('ROLE_ADMIN')">
-            This text is only visible to an admin
-            <br/>
-        </security:authorize>
-
-    </c:if>
-
+        </c:if>
+    </div>
 </div>
 <!-- /container -->
+<%@include file="footer.jsp"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>

@@ -6,6 +6,7 @@
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="accounts"/>
     <schema name="" catalog="bidb"/>
     <schema name="" catalog="booking_db"/>
     <schema name="" catalog="computer_sale"/>
@@ -21,6 +22,27 @@
     <schema name="" catalog="test"/>
     <schema name="" catalog="userdb"/>
     <schema name="" catalog="world"/>
+    <table name="role" schema="" catalog="accounts" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_user_role_roleid" table="user_role" schema="" catalog="accounts" columns="role_id"/>
+    </table>
+    <table name="user" schema="" catalog="accounts" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="username" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_user_role_userid" table="user_role" schema="" catalog="accounts" columns="user_id"/>
+    </table>
+    <table name="user_role" schema="" catalog="accounts" type="TABLE">
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="user_id,role_id"/>
+      <foreign-key name="fk_user_role_roleid" columns="role_id" ref-table="role" ref-schema="" ref-catalog="accounts" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_user_role_userid" columns="user_id" ref-table="user" ref-schema="" ref-catalog="accounts" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="fk_user_role_roleid_idx" unique="false" columns="role_id"/>
+    </table>
     <table name="admincost" schema="" catalog="bidb" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="item" sqlType="VARCHAR" precision="400" scale="0" nullable="true" jdbcType="12"/>
@@ -123,7 +145,6 @@
       <column name="idReserv" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Payment" sqlType="DECIMAL" precision="64" scale="2" nullable="false" jdbcType="3"/>
       <primary-key name="PRIMARY" columns="idCheck"/>
-      <foreign-key name="idReserv" columns="idReserv" ref-table="reservation" ref-schema="" ref-catalog="booking_db" ref-columns="idReserv" update-rule="0" delete-rule="3" deferrability="2"/>
       <index name="idCheck_UNIQUE" unique="true" columns="idCheck"/>
       <index name="idReserv_UNIQUE" unique="true" columns="idReserv"/>
     </table>
@@ -149,7 +170,6 @@
       <primary-key name="PRIMARY" columns="idReserv"/>
       <foreign-key name="idRoom" columns="idRoom" ref-table="room" ref-schema="" ref-catalog="booking_db" ref-columns="idRoom" update-rule="0" delete-rule="0" deferrability="2"/>
       <foreign-key name="idUser" columns="idUser" ref-table="user" ref-schema="" ref-catalog="booking_db" ref-columns="idUser" update-rule="0" delete-rule="0" deferrability="2"/>
-      <exported-key name="idReserv" table="check_r" schema="" catalog="booking_db" columns="idReserv"/>
       <index name="idReserv_UNIQUE" unique="true" columns="idReserv"/>
     </table>
     <table name="role" schema="" catalog="booking_db" type="TABLE">
@@ -188,18 +208,19 @@
       <column name="FirstName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="Patronymic" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="Username" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="DOB" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <column name="Sex" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="PassportSeries" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="PassportN" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="IdentificationN" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Cash" sqlType="DECIMAL" precision="64" scale="30" nullable="false" jdbcType="3"/>
+      <column name="Cash" sqlType="DECIMAL" precision="64" scale="3" nullable="false" jdbcType="3"/>
       <primary-key name="PRIMARY" columns="idUser"/>
       <foreign-key name="idRole" columns="idRole" ref-table="role" ref-schema="" ref-catalog="booking_db" ref-columns="idRole" update-rule="0" delete-rule="0" deferrability="2"/>
       <exported-key name="idUser" table="reservation" schema="" catalog="booking_db" columns="idUser"/>
       <index name="IdentificationN_UNIQUE" unique="true" columns="IdentificationN"/>
       <index name="idUser_UNIQUE" unique="true" columns="idUser"/>
+      <index name="Username_UNIQUE" unique="true" columns="Username"/>
     </table>
     <table name="clients" schema="" catalog="computer_sale" type="TABLE">
       <column name="id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" autoIncrement="true"/>
@@ -1056,20 +1077,21 @@
       <column name="Sex" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="PassportSeries" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="PassportN" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Authority" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="DateOfIssue" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="Authority" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DateOfIssue" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
       <column name="IdentificationN" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="PlaceOfBirth" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="CityLive" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Address" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PlaceOfBirth" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CityLive" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Address" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="HomePhone" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="MobilePhone" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
-      <column name="CityResidence" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Status" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Nationality" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Disability" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Pensioner" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="CityResidence" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Status" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Nationality" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Disability" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Pensioner" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
       <column name="Income" sqlType="DECIMAL" precision="64" scale="3" nullable="true" jdbcType="3"/>
+      <column name="RecieveTime" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
       <primary-key name="PRIMARY" columns="idUser"/>
       <index name="IdentificationN_UNIQUE" unique="true" columns="IdentificationN"/>
       <index name="idUsers_UNIQUE" unique="true" columns="idUser"/>
@@ -1162,6 +1184,34 @@
       <column name="dob" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91" def="JzAwMDAtMDAtMDAn"/>
       <column name="is_actor" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
       <primary-key name="PRIMARY" columns="id_producer"/>
+    </table>
+    <table name="user" schema="" catalog="mynewdatabase" type="TABLE">
+      <column name="idUser" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="SecondName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FirstName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Patronymic" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DOB" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="Sex" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="PassportSeries" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PassportN" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Authority" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DateOfIssue" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="IdentificationN" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PlaceOfBirth" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="CityLive" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Address" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="HomePhone" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="MobilePhone" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CityResidence" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Status" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Nationality" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Disability" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Pensioner" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="Income" sqlType="DECIMAL" precision="64" scale="3" nullable="true" jdbcType="3"/>
+      <column name="RecieveTime" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="idUser"/>
+      <index name="IdentificationN_UNIQUE" unique="true" columns="IdentificationN"/>
+      <index name="idUsers_UNIQUE" unique="true" columns="idUser"/>
     </table>
     <table name="columns_priv" schema="" catalog="mysql" type="SYSTEM TABLE">
       <column name="Host" sqlType="CHAR" precision="60" scale="0" nullable="false" jdbcType="1" def="Jyc="/>

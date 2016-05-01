@@ -3,9 +3,7 @@ package by.bsuir.booking.rest.dao;
 import by.bsuir.booking.rest.model.*;
 
 import java.util.List;
-/**
- * Created by User on 11.04.2016.
- */
+
 public interface CheckDao {
 
     public boolean addCheck(Check_r check) throws Exception;

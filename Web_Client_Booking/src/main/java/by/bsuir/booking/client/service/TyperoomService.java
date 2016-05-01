@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
-/**
- * Created by User on 25.04.2016.
- */
 public interface TyperoomService {
 
     void save(Typeroom typeroom) throws IOException, ParseException;

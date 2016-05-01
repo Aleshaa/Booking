@@ -112,7 +112,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO `reservation` VALUES(1,2,1,"2016-04-30", "2016-05-20", false, 0.5, false);
+INSERT INTO `reservation` VALUES(1,6,1,"2016-04-30", "2016-05-20", false, 0.5, false);
 
 CREATE TABLE IF NOT EXISTS `Check_r` (
   `idCheck` INT UNSIGNED NOT NULL AUTO_INCREMENT,

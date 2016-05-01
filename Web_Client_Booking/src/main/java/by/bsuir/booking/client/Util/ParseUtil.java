@@ -1,8 +1,6 @@
 package by.bsuir.booking.client.Util;
 
-import by.bsuir.booking.client.model.Room;
-import by.bsuir.booking.client.model.Typeroom;
-import by.bsuir.booking.client.model.User;
+import by.bsuir.booking.client.model.*;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
@@ -145,4 +143,67 @@ public class ParseUtil {
         return typeroom;
     }
     //*******
+    //***PARSE RESERVATION***
+    public static Reservation parseJsonToReservation (JSONObject obj) throws ParseException {
+
+        System.out.println(obj.toString());
+        JSONObject RoomObj= obj.getJSONObject("roomByIdRoom");
+        JSONObject UserObj= obj.getJSONObject("userByIdUser");
+        Date checkIn = null;
+        Date checkOut = null;
+        if(obj.getInt("idReserv")==0) {
+            checkIn = parseLongToDate(obj.getLong("checkInDate"));
+            checkOut = parseLongToDate(obj.getLong("checkOutDate"));
+        }
+        else {
+            checkIn = parseStringToDate(obj.getString("checkInDate"));
+            checkOut = parseStringToDate(obj.getString("checkOutDate"));
+        }
+
+        Reservation reservation = new Reservation(obj.getInt("idReserv"), obj.getInt("idUser"), obj.getInt("idRoom"), checkIn, checkOut, (byte) obj.getInt("complete"), (float)obj.getDouble("interestPayment"), (byte) obj.getInt("arrived"), parseJsonToRoom(RoomObj), parseJsonToUser(UserObj));
+
+        return reservation;
+    }
+
+    public static JSONObject parseReservationToJson(Reservation reservation){
+
+        JSONObject jo = new JSONObject();
+        JSONObject joRoom = parseRoomToJson(reservation.getRoomByIdRoomR());
+        JSONObject joUser = parseUserToJson(reservation.getUserByIdUser());
+
+        jo.put("idReserv", reservation.getIdReserv());
+        jo.put("idUser", reservation.getUserByIdUser().getIdUser());
+        jo.put("idRoom", reservation.getRoomByIdRoomR().getIdRoom());
+        jo.put("checkInDate", parseDateToString(reservation.getCheckInDateR()));
+        jo.put("checkOutDate", parseDateToString(reservation.getCheckOutDateR()));
+        jo.put("complete", reservation.getComplete());
+        jo.put("interestPayment", reservation.getInterestPayment());
+        jo.put("arrived", reservation.getArrived());
+        jo.put("roomByIdRoom", joRoom);
+        jo.put("userByIdUser", joUser);
+
+        return jo;
+    }
+    //******
+    //***PARSE CHECK***
+    public static Check_r parseJsonToCheck (JSONObject obj) throws ParseException {
+
+        System.out.println(obj.toString());
+
+        Check_r check_r = new Check_r(obj.getInt("idCheck"), obj.getInt("idReserv"), BigDecimal.valueOf(obj.getDouble("payment")));
+
+        return check_r;
+    }
+
+    public static JSONObject parseCheckToJson(Check_r check_r){
+
+        JSONObject jo = new JSONObject();
+
+        jo.put("idCheck", check_r.getIdCheck());
+        jo.put("idReserv", check_r.getIdReserv());
+        jo.put("payment", check_r.getPayment());
+
+        return jo;
+    }
+    //******
 }

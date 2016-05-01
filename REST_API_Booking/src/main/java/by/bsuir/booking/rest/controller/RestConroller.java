@@ -661,6 +661,22 @@ public class RestConroller {
         return room;
     }
 
+    @RequestMapping(value = "/room/search/{n}", method = RequestMethod.GET)
+    public @ResponseBody
+    Room getRoomByN(@PathVariable("n") int n) {
+        Room room = null;
+        try {
+            room = roomServices.getRoomByN(n);
+            if (room==null)
+                room = new Room();
+        } catch (Exception e) {
+            e.printStackTrace();
+            room = new Room();
+            return room;
+        }
+        return room;
+    }
+
     @RequestMapping(value = "/rooms", method = RequestMethod.GET)
     public @ResponseBody
     List<Room> getRooms() {

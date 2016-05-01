@@ -13,6 +13,7 @@ public interface RoomDao {
     public boolean updateRoom(Room room) throws Exception;
     public boolean updateRooms(List<Room> rooms) throws Exception;
     public Room getRoomById(int id) throws Exception;
+    public Room getRoomByN(int N) throws Exception;
     public List<Room> getRoomList() throws Exception;
     public boolean deleteRoom(int id) throws Exception;
     public boolean deleteAllRooms() throws Exception;

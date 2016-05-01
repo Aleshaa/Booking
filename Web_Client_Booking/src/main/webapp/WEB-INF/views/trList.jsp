@@ -26,7 +26,9 @@
           <div class="caption">
             <h3>${tr.nameTRoom}</h3>
             <p>Вместительность: ${tr.roominess} человек<br><br/> Цена: ${tr.price} </p>
-            <p><a href="${contextPath}/deleteTR?id=${tr.idTRoom}" class="btn btn-primary" role="button">Удалить</a> <a href="${contextPath}/trEdit?id=${tr.idTRoom}" class="btn btn-default" role="button">Редактировать</a></p>
+            <security:authorize access="hasRole('ROLE_ADMIN')">
+              <p><a href="${contextPath}/deleteTR?id=${tr.idTRoom}" class="btn btn-primary" role="button">Удалить</a> <a href="${contextPath}/trEdit?id=${tr.idTRoom}" class="btn btn-default" role="button">Редактировать</a></p>
+            </security:authorize>
           </div>
         </div>
       </div>
@@ -34,6 +36,7 @@
   </div>
 </div>
 <!-- /container -->
+<%@include file="footer.jsp"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
