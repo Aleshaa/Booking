@@ -33,6 +33,7 @@ public class ReservationListController {
     @RequestMapping(value="/reservList")
     public ModelAndView listReserv(ModelAndView model) throws IOException, ParseException {
         List<Reservation> listContact = reservationService.getAll();
+        model.addObject("count", listContact.size());
         model.addObject("listReserv", listContact);
         model.setViewName("reservList");
 

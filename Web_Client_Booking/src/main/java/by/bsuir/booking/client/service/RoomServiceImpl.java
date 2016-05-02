@@ -157,6 +157,34 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
+    public List<Room> getFreeRooms(String dateFrom, String dateFor) throws IOException, ParseException {
+        URL url_upd = new URL(SERVER_URI_ROOM + "/free/" + dateFrom + "/" + dateFor);
+        HttpURLConnection conn = (HttpURLConnection) url_upd.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Accept", "application/json");
+        if (conn.getResponseCode() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : "
+                    + conn.getResponseCode());
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+        String jsonData = "";
+        String output;
+        while ((output = br.readLine()) != null) {
+            jsonData += output + "\n";
+        }
+        List<Room> rooms = new ArrayList<Room>();
+        JSONArray jsonarray = new JSONArray(jsonData);
+        for (int i = 0; i < jsonarray.length(); i++) {
+            JSONObject obj = jsonarray.getJSONObject(i);
+            Room room = ParseUtil.parseJsonToRoom(obj);
+            rooms.add(room);
+        }
+        conn.disconnect();
+
+        return rooms;
+    }
+
+    @Override
     public List<Room> getAllRooms() throws IOException, ParseException {
         URL url_upd = new URL(SERVER_URI_ROOM + "s");
         HttpURLConnection conn = (HttpURLConnection) url_upd.openConnection();

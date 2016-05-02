@@ -69,6 +69,44 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void update(User user) throws IOException {
+        URL url = new URL(SERVER_URI_USER + "/" + user.getIdUser());
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        try {
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestMethod("PUT");
+            urlConnection.setDoOutput(true);
+            urlConnection.connect();
+
+            JSONObject jo = ParseUtil.parseUserToJson(user);
+
+            System.out.println(jo.toString());
+            OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+            out.write(jo.toString());
+            out.close();
+
+            int HttpResult = urlConnection.getResponseCode();
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+                String line = null;
+                String jsonData = "";
+                while ((line = br.readLine()) != null) {
+                    jsonData += line + "\n";
+                    System.out.println(line);
+                }
+                br.close();
+            } else
+                System.out.println(urlConnection.getResponseMessage());
+
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (urlConnection != null)
+                urlConnection.disconnect();
+        }
+    }
+
+    @Override
     public User findByUsername(String username) throws IOException, ParseException {
 
         URL url_upd = new URL(SERVER_URI_USER + "/search/" + username);

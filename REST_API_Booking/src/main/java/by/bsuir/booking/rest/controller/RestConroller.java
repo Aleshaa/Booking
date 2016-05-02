@@ -2,6 +2,7 @@ package by.bsuir.booking.rest.controller;
 
 import by.bsuir.booking.rest.model.*;
 import by.bsuir.booking.rest.services.*;
+import by.bsuir.booking.rest.util.ParseUtil;
 import by.bsuir.booking.rest.util.Status;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/")
@@ -675,6 +677,34 @@ public class RestConroller {
             return room;
         }
         return room;
+    }
+
+    @RequestMapping(value = "/room/free/{dateFrom}/{dateFor}", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Room> getFreeRooms(@PathVariable("dateFrom") String dateFrom, @PathVariable("dateFor") String dateFor) {
+        List<Room> roomList = null;
+        List<Room> resultList = new ArrayList<Room>();
+        List<Reservation> reservationList = null;
+            try {
+                roomList = roomServices.getRoomList();
+                reservationList = reservationServices.getReservationList();
+                for(Room room:roomList){
+                    int flag = 0;
+                    for(Reservation reservation:reservationList){
+                        if(room.getIdRoom()==reservation.getIdRoom()&&((ParseUtil.parseStringToDate(dateFrom).getTime()>reservation.getCheckInDate().getTime()&&ParseUtil.parseStringToDate(dateFrom).getTime()<reservation.getCheckOutDate().getTime())||(ParseUtil.parseStringToDate(dateFor).getTime()>reservation.getCheckInDate().getTime()&&ParseUtil.parseStringToDate(dateFor).getTime()<reservation.getCheckOutDate().getTime()))) {
+                            flag = 1;
+                        }
+                    }
+                    if(flag == 0){
+                        resultList.add(room);
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return resultList;
+            }
+        return resultList;
     }
 
     @RequestMapping(value = "/rooms", method = RequestMethod.GET)

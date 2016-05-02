@@ -17,6 +17,8 @@ public interface RoomService {
 
     Room getByRoomN(int id) throws IOException, ParseException;
 
+    List<Room> getFreeRooms(String dateFrom, String dateFor) throws IOException, ParseException;
+
     List<Room> getAllRooms() throws IOException, ParseException;
 
     void delRoom(int id) throws IOException;

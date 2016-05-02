@@ -18,6 +18,7 @@
 
 <!-- container -->
 <div class="container" align="center">
+  <c:if test="${count>0}">
   <h1>Список комнат</h1>
   <table class="table">
     <th>ID</th>
@@ -80,8 +81,6 @@
               <td>Прибыл</td>
             </c:if>
             <td>
-              <a href="deleteReserv?id=${reserv.idReserv}">Удалить</a>
-              <a href="${contextPath}/reservEdit?id=${reserv.idReserv}">Редактировать</a>
               <a href="#">Подтвердить прибытие</a>
             </td>
           </tr>
@@ -89,6 +88,10 @@
       </security:authorize>
     </c:forEach>
   </table>
+  </c:if>
+  <c:if test="${count == 0}">
+    <h1 class="h1">Список броней пуст!</h1>
+  </c:if>
 </div>
 <!-- /container -->
 <%@include file="footer.jsp"%>

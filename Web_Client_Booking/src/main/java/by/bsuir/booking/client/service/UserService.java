@@ -10,6 +10,8 @@ import java.util.List;
 public interface UserService {
     void save(User user) throws IOException;
 
+    void update(User user) throws IOException;
+
     User findByUsername(String username) throws IOException, ParseException;
 
     User getByID(int id) throws IOException, ParseException;

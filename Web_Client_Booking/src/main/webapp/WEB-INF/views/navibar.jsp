@@ -79,8 +79,14 @@
               </ul>
             </li>
         </c:if>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
+          <c:if test="${pageContext.request.userPrincipal.name != null}">
+              <security:authorize access="hasRole('ROLE_USER')">
+                  <li><a href="${contextPath}/personalAccount">Личный кабинет</a></li>
+              </security:authorize>
+          </c:if>
         <c:if test="${pageContext.request.userPrincipal.name == null}">
           <li><a href="${contextPath}/login">Login</a></li>
         </c:if>
@@ -97,7 +103,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 <c:if test="${pageContext.request.userPrincipal.name != null}">
-  <security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+  <security:authorize access="hasRole('ROLE_USER')">
       <nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -111,7 +117,7 @@
             <a href="#" class="navbar-brand">Забронировать свое проживание!</a>
           </div>
           <!-- Collection of nav links and other content for toggling -->
-          <form:form action="doBooking" method="post" class="navbar-form navbar-left" role="search">
+          <form:form action="reserv" method="get" class="navbar-form navbar-left" role="search">
             <div class="form-group">
                <label> C: </label>
                <input class="form-control" id="dayFrom" name="dayFrom" type="number" min="1" max="31" required/>
@@ -133,13 +139,13 @@
             </div>
 
             <div class="form-group">
-                  <label> На:</label>
+                  <label> | На:</label>
                   <input class="form-control" id="duration" name="duration" type="number" min="1" max="60" required/>
-                  <label> Дней</label>
+                  <label> дней</label>
             </div>
 
             <div class="form-group">
-              <label> Количество людей:</label>
+              <label> | Количество людей:</label>
                   <input class="form-control" id="count" name="count" type="number" value="1" min="1" max="5" required/>
               </div>
             <button type="submit" class="btn btn-default">Забронировать</button>
