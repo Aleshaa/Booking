@@ -116,7 +116,6 @@
     <br><br/>
     &nbsp;&nbsp;&nbsp;&nbsp;
   </form:form>
-
 </div>
 <%@include file="footer.jsp"%>
 <!-- /container -->
