@@ -43,7 +43,7 @@
   }
 </script>
 <div class="container">
-    <div class="jumbotron">
+    <div class="jumbotron text-center">
         <h1>Статистика по количеству номеров в отеле</h1>
         <div class="text-center row row-centered" id="chart" style="display: inline-block; width: 500px; height: 500px;" name="chart" value="${chart}"></div>
     </div>

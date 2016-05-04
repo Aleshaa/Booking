@@ -70,6 +70,7 @@ public class Reservation {
     public java.util.Date getCheckInDateR() {
         return checkInDate;
     }
+    public long getCheckInDateL(){ return  checkInDate.getTime();}
 
     public String getCheckInDateStr() {
         return ParseUtil.parseDateToString(checkInDate);
@@ -91,6 +92,10 @@ public class Reservation {
     public java.util.Date getCheckOutDateR() {
         return checkOutDate;
     }
+    public long getCheckOutDateL() {
+        return checkOutDate.getTime();
+    }
+
 
     public String getCheckOutDateStr() {
         return ParseUtil.parseDateToString(checkOutDate);

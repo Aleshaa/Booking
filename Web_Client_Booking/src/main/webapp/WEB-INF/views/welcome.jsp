@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -14,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create an account</title>
+    <title>Главная</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -36,13 +37,15 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
 
-            <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+            <h2>Добро пожаловать, ${pageContext.request.userPrincipal.name}</h2>
             <security:authorize access="hasRole('ROLE_USER')">
-                This text is only visible to a user
+                Вы попали на веб-приложение онлайн бронирования номеров в отеле KMN!
+                Вы авторизованны в качестве обычного пользователя
                 <br/>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ADMIN')">
-                This text is only visible to an admin
+                Вы попали на веб-приложение онлайн бронирования номеров в отеле KMN!
+                Вы авторизованны в качестве администратора
                 <br/>
             </security:authorize>
 

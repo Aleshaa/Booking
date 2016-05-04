@@ -189,8 +189,10 @@ public class ParseUtil {
     public static Check_r parseJsonToCheck (JSONObject obj) throws ParseException {
 
         System.out.println(obj.toString());
+        JSONObject ResObj= obj.getJSONObject("reservationByIdReserv");
 
-        Check_r check_r = new Check_r(obj.getInt("idCheck"), obj.getInt("idReserv"), BigDecimal.valueOf(obj.getDouble("payment")));
+
+        Check_r check_r = new Check_r(obj.getInt("idCheck"), obj.getInt("idReserv"), BigDecimal.valueOf(obj.getDouble("payment")), parseJsonToReservation(ResObj));
 
         return check_r;
     }
@@ -198,10 +200,12 @@ public class ParseUtil {
     public static JSONObject parseCheckToJson(Check_r check_r){
 
         JSONObject jo = new JSONObject();
+        JSONObject joRoom = parseReservationToJson(check_r.getReservationByIdReserv());
 
         jo.put("idCheck", check_r.getIdCheck());
         jo.put("idReserv", check_r.getIdReserv());
         jo.put("payment", check_r.getPayment());
+        jo.put("reservationByIdReserv", joRoom);
 
         return jo;
     }

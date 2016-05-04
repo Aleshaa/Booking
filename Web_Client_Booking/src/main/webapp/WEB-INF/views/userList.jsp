@@ -1,5 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %><html>
 <head>
     <title>Пользователи</title>
   <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -44,7 +46,7 @@
           <td>${user.identificationN}</td>
           <td>${user.cash}</td>
           <td>
-            <a href="deleteUser?id=${user.idUser}">Delete</a>
+            <a href="deleteUser?id=${user.idUser}">Удалить</a>
           </td>
         </c:if>
 

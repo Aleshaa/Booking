@@ -15,7 +15,7 @@ public class Check_r {
     private int idCheck;
     private int idReserv;
     private BigDecimal payment;
-    //private Reservation reservationByIdReserv;
+    private Reservation reservationByIdReserv;
 
     @Id
     @Column(name = "idCheck", nullable = false, insertable = true, updatable = true)
@@ -69,7 +69,7 @@ public class Check_r {
         return result;
     }
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "idReserv", referencedColumnName = "idReserv", nullable = false)
     public Reservation getReservationByIdReserv() {
         return reservationByIdReserv;
@@ -77,5 +77,5 @@ public class Check_r {
 
     public void setReservationByIdReserv(Reservation reservationByIdReserv) {
         this.reservationByIdReserv = reservationByIdReserv;
-    }*/
+    }
 }

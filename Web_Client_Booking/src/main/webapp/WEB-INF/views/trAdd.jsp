@@ -64,7 +64,7 @@
     </spring:bind>
     <spring:bind path="pictureByIdPicture">
       <div class="form-group ${status.error ? 'has-error' : ''}">
-        <form:input type="file" path="pictureByIdPicture" class="form-control" placeholder="Путь к картинке"
+        <form:input type="file" path="pictureByIdPicture" class="form-control" value="pic2.jpg" placeholder="Путь к картинке"
                     autofocus="true"></form:input>
         <form:errors path="pictureByIdPicture"></form:errors>
       </div>

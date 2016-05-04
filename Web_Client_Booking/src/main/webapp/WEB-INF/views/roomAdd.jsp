@@ -58,10 +58,10 @@
       </div>
     </spring:bind>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Сохранить</button>
     <br><br/>
     <div class="text-center">
-      <a href="${contextPath}/roomList" class="btn btn-primary" role="button">Cancel</a>
+      <a href="${contextPath}/roomList" class="btn btn-primary" role="button">Отмена</a>
     </div>
   </form:form>
 

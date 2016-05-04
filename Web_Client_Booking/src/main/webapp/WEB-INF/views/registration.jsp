@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create an account</title>
+    <title>Регистрация</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -36,7 +36,7 @@
 <div class="container">
 
     <form:form method="POST" modelAttribute="userForm" class="form-signin">
-        <h2 class="form-signin-heading">Create your account</h2>
+        <h2 class="form-signin-heading">Регистрация</h2>
         <spring:bind path="username">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="username" class="form-control" placeholder="Username"
@@ -61,43 +61,45 @@
         </spring:bind>
         <spring:bind path="secondName">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="secondName" class="form-control" placeholder="SecondName"
+                <form:input type="text" path="secondName" class="form-control" placeholder="Фамилия"
                             autofocus="true"></form:input>
                 <form:errors path="secondName"></form:errors>
             </div>
         </spring:bind>
         <spring:bind path="firstName">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="firstName" class="form-control" placeholder="FirstName"
+                <form:input type="text" path="firstName" class="form-control" placeholder="Имя"
                             autofocus="true"></form:input>
                 <form:errors path="firstName"></form:errors>
             </div>
         </spring:bind>
         <spring:bind path="patronymic">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="patronymic" class="form-control" placeholder="Patronymic"
+                <form:input type="text" path="patronymic" class="form-control" placeholder="Отчество"
                             autofocus="true"></form:input>
                 <form:errors path="patronymic"></form:errors>
             </div>
         </spring:bind>
         <spring:bind path="dob">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="dob" class="form-control" placeholder="Dob"
+                <form:input type="text" path="dob" class="form-control" placeholder="Дата рождения(гггг-ММ-дд)"
                             autofocus="true"></form:input>
                 <form:errors path="dob"></form:errors>
             </div>
         </spring:bind>
         <spring:bind path="sex">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="sex" class="form-control" placeholder="Sex"
-                            autofocus="true"></form:input>
+                <form:select path="sex" class="form-control">
+                    <form:option value="0">Мужской </form:option>
+                    <form:option value="1">Женский</form:option>
+                </form:select>
                 <form:errors path="sex"></form:errors>
 
             </div>
         </spring:bind>
         <spring:bind path="passportSeries">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="passportSeries" class="form-control" placeholder="passportSeries"
+                <form:input type="text" path="passportSeries" class="form-control" placeholder="Серия паспорта"
                             autofocus="true"></form:input>
                 <form:errors path="passportSeries"></form:errors>
 
@@ -105,7 +107,7 @@
         </spring:bind>
         <spring:bind path="passportN">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="passportN" class="form-control" placeholder="passportN"
+                <form:input type="text" path="passportN" class="form-control" placeholder="Номер паспорта"
                             autofocus="true"></form:input>
                 <form:errors path="passportN"></form:errors>
 
@@ -113,7 +115,7 @@
         </spring:bind>
         <spring:bind path="identificationN">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="identificationN" class="form-control" placeholder="identificationN"
+                <form:input type="text" path="identificationN" class="form-control" placeholder="Идентификационный номер паспорта"
                             autofocus="true"></form:input>
                 <form:errors path="identificationN"></form:errors>
 
@@ -121,7 +123,7 @@
         </spring:bind>
         <spring:bind path="cash">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="cash" class="form-control" placeholder="cash"
+                <form:input type="text" path="cash" class="form-control" placeholder="Деньги"
                             autofocus="true"></form:input>
                 <form:errors path="cash"></form:errors>
 

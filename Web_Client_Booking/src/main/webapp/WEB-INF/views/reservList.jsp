@@ -1,5 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %><html>
 <head>
   <title>Список броней</title>
   <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -32,7 +34,17 @@
 
     <c:forEach var="reserv" items="${listReserv}" varStatus="status">
       <security:authorize access="hasRole('ROLE_ADMIN')">
-      <tr>
+        <c:if test="${reserv.checkInDateL > date}">
+          <tr>
+        </c:if>
+        <c:if test="${reserv.checkInDateL < date}">
+          <c:if test="${reserv.arrived == 1}">
+            <tr class="bg-success">
+          </c:if>
+          <c:if test="${reserv.arrived == 0}">
+            <tr class="bg-danger">
+          </c:if>
+        </c:if>
         <td>${reserv.idReserv}</td>
         <td>${reserv.userByIdUser.username}</td>
         <td>${reserv.roomByIdRoomR.nRoom}</td>
@@ -54,14 +66,30 @@
         <td>
           <a href="deleteReserv?id=${reserv.idReserv}">Удалить</a>
           <a href="${contextPath}/reservEdit?id=${reserv.idReserv}">Редактировать</a>
-          <a href="#">Подтвердить прибытие</a>
+          <c:if test="${reserv.arrived != 1}">
+            <c:if test="${reserv.checkInDateL <= date}">
+              <c:if test="${reserv.checkOutDateL > date}">
+                <a href="${contextPath}/reservAccept?id=${reserv.idReserv}">Подтвердить прибытие</a>
+              </c:if>
+            </c:if>
+          </c:if>
         </td>
 
       </tr>
       </security:authorize>
       <security:authorize access="hasRole('ROLE_USER')">
         <c:if test="${reserv.userByIdUser.username == pageContext.request.userPrincipal.name}">
-          <tr>
+          <c:if test="${reserv.checkInDateL > date}">
+            <tr>
+          </c:if>
+          <c:if test="${reserv.checkInDateL < date}">
+            <c:if test="${reserv.arrived == 1}">
+              <tr class="bg-success">
+            </c:if>
+            <c:if test="${reserv.arrived == 0}">
+              <tr class="bg-danger">
+            </c:if>
+          </c:if>
             <td>${reserv.idReserv}</td>
             <td>${reserv.userByIdUser.username}</td>
             <td>${reserv.roomByIdRoomR.nRoom}</td>
@@ -81,7 +109,13 @@
               <td>Прибыл</td>
             </c:if>
             <td>
-              <a href="#">Подтвердить прибытие</a>
+              <c:if test="${reserv.arrived != 1}">
+                <c:if test="${reserv.checkInDateL <= date}">
+                  <c:if test="${reserv.checkOutDateL > date}">
+                    <a href="${contextPath}/reservAccept?id=${reserv.idReserv}">Подтвердить прибытие</a>
+                  </c:if>
+                </c:if>
+              </c:if>
             </td>
           </tr>
         </c:if>

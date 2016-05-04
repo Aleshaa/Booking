@@ -158,6 +158,6 @@ public class Check_rServiceImpl implements Check_rService{
 
     @Override
     public void delete(int id) throws IOException {
-        System.out.println("Заглушка на удаление Чека");
+        System.out.println("Р—Р°РіР»СѓС€РєР° РЅР° СѓРґР°Р»РµРЅРёРµ Р§РµРєР°");
     }
 }

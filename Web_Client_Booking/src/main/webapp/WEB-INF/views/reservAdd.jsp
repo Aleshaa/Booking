@@ -31,7 +31,6 @@
 <body>
 
 <%@include file="navibar.jsp"%>
-<%@include file="navibar.jsp"%>
 
 <div class="container">
 

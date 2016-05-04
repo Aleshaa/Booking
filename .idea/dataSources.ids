@@ -145,6 +145,7 @@
       <column name="idReserv" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Payment" sqlType="DECIMAL" precision="64" scale="2" nullable="false" jdbcType="3"/>
       <primary-key name="PRIMARY" columns="idCheck"/>
+      <foreign-key name="idReserv" columns="idReserv" ref-table="reservation" ref-schema="" ref-catalog="booking_db" ref-columns="idReserv" update-rule="0" delete-rule="3" deferrability="2"/>
       <index name="idCheck_UNIQUE" unique="true" columns="idCheck"/>
       <index name="idReserv_UNIQUE" unique="true" columns="idReserv"/>
     </table>
@@ -170,6 +171,7 @@
       <primary-key name="PRIMARY" columns="idReserv"/>
       <foreign-key name="idRoom" columns="idRoom" ref-table="room" ref-schema="" ref-catalog="booking_db" ref-columns="idRoom" update-rule="0" delete-rule="0" deferrability="2"/>
       <foreign-key name="idUser" columns="idUser" ref-table="user" ref-schema="" ref-catalog="booking_db" ref-columns="idUser" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="idReserv" table="check_r" schema="" catalog="booking_db" columns="idReserv"/>
       <index name="idReserv_UNIQUE" unique="true" columns="idReserv"/>
     </table>
     <table name="role" schema="" catalog="booking_db" type="TABLE">

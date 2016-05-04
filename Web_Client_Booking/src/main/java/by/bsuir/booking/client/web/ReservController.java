@@ -1,14 +1,8 @@
 package by.bsuir.booking.client.web;
 
 import by.bsuir.booking.client.Util.ParseUtil;
-import by.bsuir.booking.client.model.Reservation;
-import by.bsuir.booking.client.model.Room;
-import by.bsuir.booking.client.model.Typeroom;
-import by.bsuir.booking.client.model.User;
-import by.bsuir.booking.client.service.ReservationService;
-import by.bsuir.booking.client.service.RoomService;
-import by.bsuir.booking.client.service.TyperoomService;
-import by.bsuir.booking.client.service.UserService;
+import by.bsuir.booking.client.model.*;
+import by.bsuir.booking.client.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -34,10 +28,19 @@ public class ReservController {
     ReservationService reservationService;
     @Autowired
     UserService userService;
+    @Autowired
+    Check_rService check_rService;
 
     @RequestMapping(value = "/reserv", method = RequestMethod.GET)
     public String makeReserv(HttpServletRequest request, Model model) throws IOException, ParseException {
             String dateFrom = request.getParameter("yearFrom") + "-" + request.getParameter("monthFrom") + "-" + request.getParameter("dayFrom");
+            if(ParseUtil.parseStringToDate(dateFrom).getTime()<(new java.util.Date()).getTime()) {
+                model.addAttribute("messageNav", "Некорректная дата");
+                return "welcome";
+            }
+            else {
+                model.addAttribute("messageNav", "");
+            }
             int count = Integer.parseInt(request.getParameter("count"));
             int countDay = Integer.parseInt(request.getParameter("duration"));
             int dayFor = 0;
@@ -89,20 +92,29 @@ public class ReservController {
         String dateFor = ParseUtil.parseDateToString(ParseUtil.parseLongToDate((ParseUtil.parseStringToDate(dateFrom).getTime() + count * 60000 * 1440)/1000));
         if(user.getCash().doubleValue()>count*tr.getPrice().doubleValue()){
             model.addAttribute("count", -1);
-            model.addAttribute("message", "Номер успешно забронирован");
+            model.addAttribute("message", "Успешно забронировано");
             List<Room> freeRooms = roomService.getFreeRooms(dateFrom,dateFor);
             for (Room room:freeRooms){
                 if(tr.getIdTRoom()==room.getIdTRoom()){
                     user.setCash(BigDecimal.valueOf(user.getCash().doubleValue() - count * tr.getPrice().doubleValue() * 0.5));
+                    System.out.println(user.getCash());
                     Reservation reservation = new Reservation(0,user.getIdUser(),room.getIdRoom(),ParseUtil.parseStringToDate(dateFrom),ParseUtil.parseStringToDate(dateFor), (byte)0, (float)0.5, (byte)0, room, user);
                     userService.update(user);
                     reservationService.save(reservation);
+                    List<Reservation> list = reservationService.getAll();
+                    Reservation res = new Reservation();
+                    for(Reservation reserv:list){
+                        res=reserv;
+                    }
+                    Check_r check_r = new Check_r(0,res.getIdReserv(), BigDecimal.valueOf((double)reservation.getInterestPayment()*reservation.getRoomByIdRoomR().getTyperoomByIdTRoomTR().getPrice().doubleValue()), res);
+                    System.out.println("CHECK"+check_r.getPayment());
+                    check_rService.save(check_r);
                     break;
                 }
             }
         }
         else{
-            model.addAttribute("message", "У вас недостаточно средств для брониования номера");
+            model.addAttribute("message", "Недостаточно средств");
         }
         //typeroomService.delTTypeRoom(TrID);
         return "reserv";

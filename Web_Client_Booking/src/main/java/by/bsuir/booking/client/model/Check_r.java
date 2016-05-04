@@ -10,13 +10,13 @@ public class Check_r {
     private int idCheck;
     private int idReserv;
     private BigDecimal payment;
-    //private Reservation reservationByIdReserv;
+    private Reservation reservationByIdReserv;
 
-    public Check_r(int idCheck, int idReserv, BigDecimal payment) {
+    public Check_r(int idCheck, int idReserv, BigDecimal payment, Reservation reservationByIdReserv) {
         this.idCheck = idCheck;
         this.idReserv = idReserv;
         this.payment = payment;
-        //this.reservationByIdReserv = reservationByIdReserv;
+        this.reservationByIdReserv = reservationByIdReserv;
     }
 
     public int getIdCheck() {
@@ -66,11 +66,11 @@ public class Check_r {
     }
 
 
-    /*public Reservation getReservationByIdReserv() {
+    public Reservation getReservationByIdReserv() {
         return reservationByIdReserv;
     }
 
     public void setReservationByIdReserv(Reservation reservationByIdReserv) {
         this.reservationByIdReserv = reservationByIdReserv;
-    }*/
+    }
 }

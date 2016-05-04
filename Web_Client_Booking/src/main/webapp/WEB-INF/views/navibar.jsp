@@ -61,7 +61,6 @@
               <ul class="dropdown-menu">
                 <li><a href="${contextPath}/reservList">Просмотреть</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="${contextPath}/reservAdd">Добавить</a></li>
               </ul>
             </li>
           </security:authorize>
@@ -73,9 +72,12 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статистика<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="${contextPath}/TypeStat">По типам номеров</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="${contextPath}/">По ...</a></li>
+                  <li><a href="${contextPath}/TypeStat">По типам номеров</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="${contextPath}/BarChart">По популярности номеров</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="${contextPath}/BarChartProfit">По прибыли от номеров</a></li>
+                  <li role="separator" class="divider"></li>
               </ul>
             </li>
         </c:if>
@@ -88,12 +90,12 @@
               </security:authorize>
           </c:if>
         <c:if test="${pageContext.request.userPrincipal.name == null}">
-          <li><a href="${contextPath}/login">Login</a></li>
+          <li><a href="${contextPath}/login">Войти</a></li>
         </c:if>
       </ul>
       <p class="navbar-text navbar-right">
           <c:if test="${pageContext.request.userPrincipal.name != null}">
-            ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
+            ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a>
             <form id="logoutForm" method="POST" action="${contextPath}/logout">
               <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
@@ -120,9 +122,9 @@
           <form:form action="reserv" method="get" class="navbar-form navbar-left" role="search">
             <div class="form-group">
                <label> C: </label>
-               <input class="form-control" id="dayFrom" name="dayFrom" type="number" min="1" max="31" required/>
+               <input class="form-control" id="dayFrom" name="dayFrom" value="5" type="number" min="1" max="31" required/>
                <select class="form-control" id="monthFrom" name="monthFrom">
-                    <option value="05">Май</option>
+                    <option value="05" selected>Май</option>
                     <option value="06">Июнь</option>
                     <option value="07">Июль</option>
                     <option value="08">Август</option>
@@ -135,12 +137,12 @@
                     <option value="03">Март</option>
                     <option value="04">Апрель</option>
                   </select>
-                  <input class="form-control" id="yearFrom" name="yearFrom" type="number" min="2016" max="2018" required/>
+                  <input class="form-control" id="yearFrom" name="yearFrom" value="2016" type="number" min="2016" max="2018" required/>
             </div>
 
             <div class="form-group">
                   <label> | На:</label>
-                  <input class="form-control" id="duration" name="duration" type="number" min="1" max="60" required/>
+                  <input class="form-control" id="duration" name="duration" value="1" type="number" min="1" max="60" required/>
                   <label> дней</label>
             </div>
 
@@ -148,6 +150,11 @@
               <label> | Количество людей:</label>
                   <input class="form-control" id="count" name="count" type="number" value="1" min="1" max="5" required/>
               </div>
+              <c:if test="${not empty messageNav}">
+                  <div class="form-group">
+                      <label class="text-danger">${messageNav}!</label>
+                  </div>
+              </c:if>
             <button type="submit" class="btn btn-default">Забронировать</button>
           </form:form>
         </div>

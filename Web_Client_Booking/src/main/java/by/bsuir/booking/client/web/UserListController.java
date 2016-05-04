@@ -5,7 +5,9 @@ import by.bsuir.booking.client.service.SecurityService;
 import by.bsuir.booking.client.service.UserService;
 import by.bsuir.booking.client.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 
@@ -30,6 +33,12 @@ public class UserListController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
 
     @RequestMapping(value="/userList")
@@ -83,9 +92,28 @@ public class UserListController {
     }
 
     @RequestMapping(value = "/fillUpBalance", method = RequestMethod.GET)
-    public ModelAndView fillUpBalance(HttpServletRequest request) throws IOException {
-        int userId = Integer.parseInt(request.getParameter("id"));
-        System.out.println(userId + " Test fill up balance");
-        return new ModelAndView("redirect:/personalAccount");
+        public String fillUpBalance (HttpServletRequest request, Model model)throws IOException, ParseException {
+            model.addAttribute("idUser", request.getParameter("idUser"));
+            return "fillUpBalance";
+        }
+
+
+    @RequestMapping(value = "/fillUpBalance", method = RequestMethod.POST)
+    public String fillUpBalancePOST(HttpServletRequest request, Model model) throws IOException, ParseException {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUsername(name);
+        model.addAttribute("idUser", user.getIdUser());
+        if(request.getParameter("password").equals(request.getParameter("passwordConfirm"))) {
+            if(request.getParameter("password").equals("Krest78223460")) {
+                System.out.println(user.getCash().doubleValue() + (double) Integer.parseInt(request.getParameter("cash")));
+                user.setCash(BigDecimal.valueOf(user.getCash().doubleValue() + (double) Integer.parseInt(request.getParameter("cash"))));
+                userService.update(user);
+                model.addAttribute("message", "Счет пополнен");
+            }
+        }
+            else{
+                model.addAttribute("message", "Ошибка");
+            }
+        return "fillUpBalance";
     }
 }

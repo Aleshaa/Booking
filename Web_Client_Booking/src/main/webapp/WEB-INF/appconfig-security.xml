@@ -9,8 +9,21 @@
 
     <http auto-config="true">
         <intercept-url pattern="/" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <intercept-url pattern="/TypeStat" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <intercept-url pattern="/trList" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <intercept-url pattern="/roomList" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <intercept-url pattern="/reservList" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <intercept-url pattern="/reserv" access="hasAnyRole('ROLE_USER')"/>
+        <intercept-url pattern="/BarChart" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <intercept-url pattern="/BarChartProfit" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
         <intercept-url pattern="/userList" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/trAdd" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/roomAdd" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/reservAdd" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/personalAccount" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/editAccount" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/fillUpBalance" access="hasRole('ROLE_USER')"/>
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout" />
     </http>

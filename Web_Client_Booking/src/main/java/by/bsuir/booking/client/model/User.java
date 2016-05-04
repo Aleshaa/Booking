@@ -168,6 +168,9 @@ public class User implements Serializable {
         return cash;
     }
 
+    public void setCash(String cash) {
+        this.cash = BigDecimal.valueOf(Double.parseDouble(cash));
+    }
     public void setCash(BigDecimal cash) {
         this.cash = cash;
     }

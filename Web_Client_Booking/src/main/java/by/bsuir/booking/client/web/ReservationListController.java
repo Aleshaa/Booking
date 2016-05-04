@@ -1,8 +1,10 @@
 package by.bsuir.booking.client.web;
 
+import by.bsuir.booking.client.model.Check_r;
 import by.bsuir.booking.client.model.Reservation;
 import by.bsuir.booking.client.model.Room;
 import by.bsuir.booking.client.model.User;
+import by.bsuir.booking.client.service.Check_rService;
 import by.bsuir.booking.client.service.ReservationService;
 import by.bsuir.booking.client.service.RoomService;
 import by.bsuir.booking.client.service.UserService;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 
@@ -29,10 +32,14 @@ public class ReservationListController {
     RoomService roomService;
     @Autowired
     UserService userService;
+    @Autowired
+    Check_rService check_rService;
 
     @RequestMapping(value="/reservList")
     public ModelAndView listReserv(ModelAndView model) throws IOException, ParseException {
         List<Reservation> listContact = reservationService.getAll();
+        model.addObject("date", (new java.util.Date()).getTime());
+        System.out.println((new java.util.Date()).getTime());
         model.addObject("count", listContact.size());
         model.addObject("listReserv", listContact);
         model.setViewName("reservList");
@@ -88,6 +95,23 @@ public class ReservationListController {
     public ModelAndView deleteReserv(HttpServletRequest request) throws IOException {
         int ReservID = Integer.parseInt(request.getParameter("id"));
         reservationService.delete(ReservID);
+        return new ModelAndView("redirect:/reservList");
+    }
+
+    @RequestMapping(value = "/reservAccept", method = RequestMethod.GET)
+    public ModelAndView acceptReserv(HttpServletRequest request) throws IOException, ParseException {
+        int ReservID = Integer.parseInt(request.getParameter("id"));
+        Reservation reservation = reservationService.getReservationByID(ReservID);
+        reservation.setArrived((byte) 1);
+        reservation.setComplete((byte) 1);
+        long day = (reservation.getCheckOutDateR().getTime() - reservation.getCheckInDateR().getTime())/24*3600*1000;
+        System.out.println(day);
+        User user = userService.getByID(reservation.getIdUser());
+        user.setCash(BigDecimal.valueOf(user.getCash().doubleValue() - day * reservation.getRoomByIdRoomR().getTyperoomByIdTRoomTR().getPrice().doubleValue() * (1 - (double) reservation.getInterestPayment())));
+        Check_r check_r = new Check_r(0,reservation.getIdReserv(), BigDecimal.valueOf((1-(double) reservation.getInterestPayment()) * reservation.getRoomByIdRoomR().getTyperoomByIdTRoomTR().getPrice().doubleValue()), reservation);
+        reservationService.update(reservation);
+        userService.update(user);
+        check_rService.save(check_r);
         return new ModelAndView("redirect:/reservList");
     }
 }
