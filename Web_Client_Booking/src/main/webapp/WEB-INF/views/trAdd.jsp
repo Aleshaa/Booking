@@ -69,6 +69,7 @@
         <form:errors path="pictureByIdPicture"></form:errors>
       </div>
     </spring:bind>
+    <input type="hidden" name="pic" value="${trForm.pictureByIdPicture}">
     <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     <br><br/>
     <div class="text-center">

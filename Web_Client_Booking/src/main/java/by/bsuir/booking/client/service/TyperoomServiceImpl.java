@@ -1,5 +1,6 @@
 package by.bsuir.booking.client.service;
 
+import by.bsuir.booking.client.Util.HostName;
 import by.bsuir.booking.client.Util.ParseUtil;
 import by.bsuir.booking.client.model.Picture;
 import by.bsuir.booking.client.model.Typeroom;
@@ -22,7 +23,7 @@ import java.util.List;
 @Service
 public class TyperoomServiceImpl implements TyperoomService {
 
-    public static final String SERVER_URI_TR= "http://localhost:8080/rest/";
+    public static final String SERVER_URI_TR= HostName.HOST + "/rest/";
 
     @Autowired
     PictureService pictureService;

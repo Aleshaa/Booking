@@ -1,5 +1,6 @@
 package by.bsuir.booking.client.service;
 
+import by.bsuir.booking.client.Util.HostName;
 import by.bsuir.booking.client.model.Picture;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +18,7 @@ import java.text.ParseException;
 @Service
 public class PictureServiceImpl implements PictureService {
 
-    public static final String SERVER_URI_PIC= "http://localhost:8080/rest/picture";
+    public static final String SERVER_URI_PIC= HostName.HOST + "/rest/picture";
 
 
     @Override

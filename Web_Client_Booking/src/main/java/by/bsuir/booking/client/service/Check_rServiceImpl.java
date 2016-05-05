@@ -1,5 +1,6 @@
 package by.bsuir.booking.client.service;
 
+import by.bsuir.booking.client.Util.HostName;
 import by.bsuir.booking.client.Util.ParseUtil;
 import by.bsuir.booking.client.model.Check_r;
 import org.json.JSONArray;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 @Service
 public class Check_rServiceImpl implements Check_rService{
 
-    public static final String SERVER_URI_CHECK = "http://localhost:8080/rest/check";
+    public static final String SERVER_URI_CHECK = HostName.HOST + "/rest/check";
 
     @Override
     public void save(Check_r check_r) throws IOException {

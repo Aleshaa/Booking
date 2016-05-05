@@ -38,9 +38,7 @@ public class TRListController {
     @RequestMapping(value = "/trEdit", method = RequestMethod.GET)
     public String editTypeRoom(HttpServletRequest request, Model model) throws IOException, ParseException {
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println("GOVNO");
         Typeroom tr = typeroomService.getTypeRoomByID(id);
-        System.out.println(tr.getNameTRoom());
         model.addAttribute("trForm", tr);
         return "trAdd";
     }
@@ -53,9 +51,16 @@ public class TRListController {
     }
 
     @RequestMapping(value = "/trEdit", method = RequestMethod.POST)
-    public String editTypeRoom(@ModelAttribute("trForm") Typeroom trForm, BindingResult bindingResult, Model model) throws IOException, ParseException {
+    public String editTypeRoom(@ModelAttribute("trForm") Typeroom trForm, BindingResult bindingResult, Model model, HttpServletRequest req) throws IOException, ParseException {
 
-        typeroomService.update(trForm);
+        if(trForm.getPictureByIdPic()!=null) {
+            if(trForm.getPictureByIdPic().getUploadedNname()!=null&&!trForm.getPictureByIdPic().getUploadedNname().trim().equals(""))
+                typeroomService.update(trForm);
+            else{
+                trForm.setPictureByIdPicture(req.getParameter("pic"));
+                typeroomService.update(trForm);
+            }
+        }
 
         return "redirect: trList";
     }

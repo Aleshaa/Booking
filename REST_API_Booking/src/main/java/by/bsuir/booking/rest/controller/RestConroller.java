@@ -691,7 +691,7 @@ public class RestConroller {
                 for(Room room:roomList){
                     int flag = 0;
                     for(Reservation reservation:reservationList){
-                        if(room.getIdRoom()==reservation.getIdRoom()&&((ParseUtil.parseStringToDate(dateFrom).getTime()>reservation.getCheckInDate().getTime()&&ParseUtil.parseStringToDate(dateFrom).getTime()<reservation.getCheckOutDate().getTime())||(ParseUtil.parseStringToDate(dateFor).getTime()>reservation.getCheckInDate().getTime()&&ParseUtil.parseStringToDate(dateFor).getTime()<reservation.getCheckOutDate().getTime()))) {
+                        if(room.getIdRoom()==reservation.getIdRoom()&&((ParseUtil.parseStringToDate(dateFrom).getTime()>=reservation.getCheckInDate().getTime()&&ParseUtil.parseStringToDate(dateFrom).getTime()<=reservation.getCheckOutDate().getTime())||(ParseUtil.parseStringToDate(dateFor).getTime()>=reservation.getCheckInDate().getTime()&&ParseUtil.parseStringToDate(dateFor).getTime()<=reservation.getCheckOutDate().getTime())||(ParseUtil.parseStringToDate(dateFrom).getTime()<=reservation.getCheckInDate().getTime()&&ParseUtil.parseStringToDate(dateFor).getTime()>=reservation.getCheckOutDate().getTime()))) {
                             flag = 1;
                         }
                     }

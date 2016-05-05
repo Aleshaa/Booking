@@ -1,5 +1,6 @@
 package by.bsuir.booking.client.service;
 
+import by.bsuir.booking.client.Util.HostName;
 import by.bsuir.booking.client.Util.ParseUtil;
 import by.bsuir.booking.client.model.Room;
 import org.json.JSONArray;
@@ -20,7 +21,7 @@ import java.util.List;
 @Service
 public class RoomServiceImpl implements RoomService{
 
-    public static final String SERVER_URI_ROOM = "http://localhost:8080/rest/room";
+    public static final String SERVER_URI_ROOM = HostName.HOST + "/rest/room";
 
     @Override
     public void save(Room room) throws IOException {

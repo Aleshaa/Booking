@@ -1,5 +1,6 @@
 package by.bsuir.booking.client.service;
 
+import by.bsuir.booking.client.Util.HostName;
 import by.bsuir.booking.client.Util.ParseUtil;
 import by.bsuir.booking.client.model.Role;
 import by.bsuir.booking.client.model.User;
@@ -23,7 +24,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    public static final String SERVER_URI_USER = "http://localhost:8080/rest/user";
+    public static final String SERVER_URI_USER = HostName.HOST + "/rest/user";
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

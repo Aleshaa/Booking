@@ -56,17 +56,31 @@ public class ReservController {
             } else {
                 dayFor = countDay + Integer.parseInt(request.getParameter("dayFrom"));
             }
-            String dateFor = yearFor + "-" + monthFor + "-" + dayFor;
+            String dateFor;
+            if(monthFor<10){
+                dateFor = yearFor + "-0" + monthFor;
+            }
+            else {
+                dateFor = yearFor + "-" + monthFor;
+            }
+            if(dayFor < 10){
+                dateFor = dateFor + "-0" + dayFor;
+            }
+            else {
+                dateFor = dateFor + "-" + dateFor;
+            }
             model.addAttribute("dateFrom", dateFrom);
             model.addAttribute("dateFor", dateFor);
             List<Room> freeRooms = roomService.getFreeRooms(dateFrom, dateFor);
             List<Typeroom> trList = typeroomService.getAllTypeRoom();
             List<Typeroom> resultTR = new ArrayList<Typeroom>();
+            int counter = 0;
             if (freeRooms.size() > 0) {
                 for (Typeroom tr : trList) {
                     int flag = 0;
                     for (Room room : freeRooms) {
                         if (tr.getIdTRoom() == room.getIdTRoom() && count == tr.getRoominess()) {
+                            counter++;
                             flag = 1;
                         }
                     }
@@ -75,7 +89,7 @@ public class ReservController {
                     }
                 }
             }
-            model.addAttribute("count", freeRooms.size());
+            model.addAttribute("count", counter);
             model.addAttribute("roominess", count);
             model.addAttribute("listTR", resultTR);
             return "reserv";
