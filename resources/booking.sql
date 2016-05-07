@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `booking_db` /*!40100 DEFAULT CHARACTER SET latin1 */;  
+CREATE DATABASE IF NOT EXISTS `booking_db` /*!40100 DEFAULT CHARACTER SET latin1*/;  
 USE `booking_db`;  
 
 DROP TABLE IF EXISTS `Check_r`;
@@ -22,7 +22,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO `picture` VALUES(1, "pic1", "pic1.jpg", 200, 200);
+INSERT INTO `picture` VALUES(1, "pic1", "pic1.jpg", 200, 200),(2, "pic2", "pic2.jpg", 200, 200),(3, "pic3", "pic3.jpg", 200, 200);
 
 CREATE TABLE IF NOT EXISTS `Role` (
 	`idRole` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -61,7 +61,8 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-insert into `User` values(1,1,"Kurganovich","Alexey","Andrevich","Adminn","$2a$11$O5/3AFMwU9zodHlzKzGUH.dt5LjG12N.MsOscr3TCooImvr2ydGcm","1996-03-30", true, "MP", 3039657, "330A014PB1", 100);
+insert into `User` values(1,1,"Kurganovich","Alexey","Andrevich","Adminn","$2a$11$O5/3AFMwU9zodHlzKzGUH.dt5LjG12N.MsOscr3TCooImvr2ydGcm","1996-03-30", true, "MP", 3039657, "330A014PB1", 10000);
+insert into `User` values(2,2,"Bakan","Vladislav","Dmitrievich","Userrr","$2a$11$O5/3AFMwU9zodHlzKzGUH.dt5LjG12N.MsOscr3TCooImvr2ydGcm","1992-01-22", true, "MС", 2219257, "122A014PB1", 10000);
 
 CREATE TABLE IF NOT EXISTS `TypeRoom` (
   `idTRoom` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -78,6 +79,9 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 INSERT INTO `typeroom` VALUES(1,"Lux", 3, 150.00, 1);
+INSERT INTO `typeroom` VALUES(2,"Double", 2, 75.00, 2);
+INSERT INTO `typeroom` VALUES(3,"Delux", 1, 50.00, 3);
+
 
 CREATE TABLE IF NOT EXISTS `Room` (
   `idRoom` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -93,6 +97,12 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 INSERT INTO `room` VALUES(1, 101, 1);
+INSERT INTO `room` VALUES(2, 201, 1);
+INSERT INTO `room` VALUES(3, 102, 2);
+INSERT INTO `room` VALUES(4, 202, 2);
+INSERT INTO `room` VALUES(5, 103, 3);
+INSERT INTO `room` VALUES(6, 203, 3);
+
 
 CREATE TABLE IF NOT EXISTS `Reservation` (
   `idReserv` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -112,7 +122,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO `reservation` VALUES(1,6,1,"2016-04-30", "2016-05-20", false, 0.5, false);
+INSERT INTO `reservation` VALUES(1,2,1,"2016-05-04", "2016-05-20", false, 0.5, false);
 
 CREATE TABLE IF NOT EXISTS `Check_r` (
   `idCheck` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -127,4 +137,4 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO `check_r` VALUES(1,1, 3000.00);
+INSERT INTO `check_r` VALUES(1,1, 1200.00);

@@ -12,27 +12,27 @@ public class RoomServicesImpl implements RoomServices {
 
     @Override
     public boolean addRoom(Room room) throws Exception {
-        return roomDao.addRoom(room);
+        return roomDao.add(room);
     }
 
     @Override
     public boolean addRooms(List<Room> rooms) throws Exception {
-        return roomDao.addRooms(rooms);
+        return roomDao.addS(rooms);
     }
 
     @Override
     public boolean updateRoom(Room room) throws Exception {
-        return roomDao.updateRoom(room);
+        return roomDao.update(room);
     }
 
     @Override
     public boolean updateRooms(List<Room> rooms) throws Exception {
-        return roomDao.updateRooms(rooms);
+        return roomDao.updateS(rooms);
     }
 
     @Override
     public Room getRoomById(int id) throws Exception {
-        return roomDao.getRoomById(id);
+        return roomDao.getById(id);
     }
 
     @Override
@@ -42,16 +42,16 @@ public class RoomServicesImpl implements RoomServices {
 
     @Override
     public List<Room> getRoomList() throws Exception {
-        return roomDao.getRoomList();
+        return roomDao.getList();
     }
 
     @Override
     public boolean deleteRoom(int id) throws Exception {
-        return roomDao.deleteRoom(id);
+        return roomDao.delete(id);
     }
 
     @Override
     public boolean deleteAllRooms() throws Exception {
-        return roomDao.deleteAllRooms();
+        return roomDao.deleteAll();
     }
 }

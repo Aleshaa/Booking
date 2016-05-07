@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
+
 public class TypeRoomDaoImpl implements TypeRoomDao{
     @Autowired
     SessionFactory sessionFactory;
@@ -19,8 +17,16 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
     Session session = null;
     Transaction tx = null;
 
+    private static final TypeRoomDaoImpl instance = new TypeRoomDaoImpl();
+
+    public TypeRoomDaoImpl(){}
+
+    public static TypeRoomDaoImpl getInstance(){
+        return instance;
+    }
+
     @Override
-    public boolean addTypeRoom(Typeroom typeRoom) throws Exception {
+    public boolean add(Typeroom typeRoom) throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         session.save(typeRoom);
@@ -31,7 +37,7 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
     }
 
     @Override
-    public boolean addTypesRoom(List<Typeroom> typesRoom) throws Exception {
+    public boolean addS(List<Typeroom> typesRoom) throws Exception {
         session = sessionFactory.openSession();
 
         for(Typeroom typeroom:typesRoom) {
@@ -45,8 +51,7 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
     }
 
     @Override
-    public boolean updateTypeRoom(Typeroom typeRoom) throws Exception {
-        System.out.println("TEST UPDATE TR");
+    public boolean update(Typeroom typeRoom) throws Exception {
         session = sessionFactory.openSession();
         Typeroom typeRoom1;
         typeRoom1 = (Typeroom) session.load(Typeroom.class, typeRoom.getIdTRoom());
@@ -60,7 +65,7 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
     }
 
     @Override
-    public boolean updateTypesRoom(List<Typeroom> typesRoom) throws Exception {
+    public boolean updateS(List<Typeroom> typesRoom) throws Exception {
         session = sessionFactory.openSession();
         for(Typeroom typeRoom:typesRoom) {
             Typeroom typeRoom1;
@@ -76,7 +81,7 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
     }
 
     @Override
-    public Typeroom getTypeRoomById(int id) throws Exception {
+    public Typeroom getById(int id) throws Exception {
         session = sessionFactory.openSession();
         Typeroom typeRoom = (Typeroom) session.load(Typeroom.class, new Integer(id));
         tx = session.getTransaction();
@@ -100,7 +105,7 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Typeroom> getTypeRoomList() throws Exception {
+    public List<Typeroom> getList() throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         List<Typeroom> typeRoomList = session.createCriteria(Typeroom.class).list();
@@ -110,7 +115,7 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
     }
 
     @Override
-    public boolean deleteTypeRoom(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
         session = sessionFactory.openSession();
         Object o = session.load(Typeroom.class, id);
         tx = session.getTransaction();
@@ -121,7 +126,7 @@ public class TypeRoomDaoImpl implements TypeRoomDao{
     }
 
     @Override
-    public boolean deleteAllTypesRoom() throws Exception {
+    public boolean deleteAll() throws Exception {
         session = sessionFactory.openSession();
         tx = session.getTransaction();
         session.beginTransaction();

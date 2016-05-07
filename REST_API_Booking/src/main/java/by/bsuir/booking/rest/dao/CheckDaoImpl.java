@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
 public class CheckDaoImpl implements CheckDao {
     @Autowired
     SessionFactory sessionFactory;
@@ -18,8 +15,16 @@ public class CheckDaoImpl implements CheckDao {
     Session session = null;
     Transaction tx = null;
 
+    private static final CheckDaoImpl instance = new CheckDaoImpl();
+
+    public CheckDaoImpl(){}
+
+    public static CheckDaoImpl getInstance(){
+        return instance;
+    }
+
     @Override
-    public boolean addCheck(Check_r check) throws Exception {
+    public boolean add(Check_r check) throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         session.save(check);
@@ -30,7 +35,7 @@ public class CheckDaoImpl implements CheckDao {
     }
 
     @Override
-    public boolean addChecks(List<Check_r> checks) throws Exception {
+    public boolean addS(List<Check_r> checks) throws Exception {
         session = sessionFactory.openSession();
 
         for(Check_r check_r:checks) {
@@ -44,7 +49,7 @@ public class CheckDaoImpl implements CheckDao {
     }
 
     @Override
-    public boolean updateCheck(Check_r check) throws Exception {
+    public boolean update(Check_r check) throws Exception {
         session = sessionFactory.openSession();
         Check_r check_r1;
         check_r1 = (Check_r) session.load(Check_r.class, check.getIdCheck());
@@ -58,7 +63,7 @@ public class CheckDaoImpl implements CheckDao {
     }
 
     @Override
-    public boolean updateChecks(List<Check_r> checks) throws Exception {
+    public boolean updateS(List<Check_r> checks) throws Exception {
         session = sessionFactory.openSession();
         for(Check_r check_r:checks) {
             Check_r check_r1;
@@ -74,7 +79,7 @@ public class CheckDaoImpl implements CheckDao {
     }
 
     @Override
-    public Check_r getCheckById(int id) throws Exception {
+    public Check_r getById(int id) throws Exception {
         session = sessionFactory.openSession();
         Check_r check_r = (Check_r) session.load(Check_r.class, new Integer(id));
         tx = session.getTransaction();
@@ -85,7 +90,7 @@ public class CheckDaoImpl implements CheckDao {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Check_r> getCheckList() throws Exception {
+    public List<Check_r> getList() throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         List<Check_r> checkRList = session.createCriteria(Check_r.class).list();
@@ -95,7 +100,7 @@ public class CheckDaoImpl implements CheckDao {
     }
 
     @Override
-    public boolean deleteCheck(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
         session = sessionFactory.openSession();
         Object o = session.load(Check_r.class, id);
         tx = session.getTransaction();
@@ -106,7 +111,7 @@ public class CheckDaoImpl implements CheckDao {
     }
 
     @Override
-    public boolean deleteAllChecks() throws Exception {
+    public boolean deleteAll() throws Exception {
         session = sessionFactory.openSession();
         tx = session.getTransaction();
         session.beginTransaction();

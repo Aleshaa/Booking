@@ -1,6 +1,5 @@
 package by.bsuir.booking.client.service;
 
-import by.bsuir.booking.client.Util.HostName;
 import by.bsuir.booking.client.Util.ParseUtil;
 import by.bsuir.booking.client.model.Reservation;
 import org.json.JSONArray;
@@ -21,7 +20,7 @@ import java.util.List;
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
-    public static final String SERVER_URI_RESERVATION = HostName.HOST + "/rest/reservation";
+    public static final String SERVER_URI_RESERVATION = "http://booking.mycloud.by/rest/reservation";
 
     @Override
     public void save(Reservation reservation) throws IOException {

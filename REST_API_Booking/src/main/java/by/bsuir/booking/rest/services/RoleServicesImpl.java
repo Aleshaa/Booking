@@ -15,41 +15,41 @@ public class RoleServicesImpl implements RoleServices {
 
     @Override
     public boolean addRole(Role role) throws Exception {
-        return roleDao.addRole(role);
+        return roleDao.add(role);
     }
 
     @Override
     public boolean addRoles(List<Role> roles) throws Exception {
-        return roleDao.addRoles(roles);
+        return roleDao.addS(roles);
     }
 
     @Override
     public boolean updateRole(Role role) throws Exception {
-        return roleDao.updateRole(role);
+        return roleDao.update(role);
     }
 
     @Override
     public boolean updateRoles(List<Role> users) throws Exception {
-        return roleDao.updateRoles(users);
+        return roleDao.updateS(users);
     }
 
     @Override
     public Role getRoleById(int id) throws Exception {
-        return roleDao.getRoleById(id);
+        return roleDao.getById(id);
     }
 
     @Override
     public List<Role> getRoleList() throws Exception {
-        return roleDao.getRoleList();
+        return roleDao.getList();
     }
 
     @Override
     public boolean deleteRole(int id) throws Exception {
-        return roleDao.deleteRole(id);
+        return roleDao.delete(id);
     }
 
     @Override
     public boolean deleteAllRoles() throws Exception {
-        return roleDao.deleteAllRoles();
+        return roleDao.deleteAll();
     }
 }

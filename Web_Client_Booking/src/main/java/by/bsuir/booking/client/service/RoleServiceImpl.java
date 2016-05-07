@@ -1,6 +1,5 @@
 package by.bsuir.booking.client.service;
 
-import by.bsuir.booking.client.Util.HostName;
 import by.bsuir.booking.client.model.Role;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import java.text.ParseException;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-    public static final String SERVER_URI_ROLE = HostName.HOST + "/rest/role/";
+    public static final String SERVER_URI_ROLE = "http://booking.mycloud.by/rest/role/";
 
     @Override
     public Role getRoleByID(int id) throws IOException, ParseException {

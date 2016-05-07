@@ -48,6 +48,7 @@ public class User implements Serializable {
         this.passportN = passportN;
         this.identificationN = identificationN;
         this.cash = cash;
+        System.out.println("Constructor User: cash = " + this.cash);
         this.roleByIdRole = new Role(obj.getInt("idRole"), obj.getString("nameRole"));
     }
 
@@ -170,9 +171,11 @@ public class User implements Serializable {
 
     public void setCash(String cash) {
         this.cash = BigDecimal.valueOf(Double.parseDouble(cash));
+        System.out.println("setCash User: cash = " + this.cash);
     }
     public void setCash(BigDecimal cash) {
         this.cash = cash;
+        System.out.println("Constructor User: cash = " + this.cash);
     }
 
     @Override

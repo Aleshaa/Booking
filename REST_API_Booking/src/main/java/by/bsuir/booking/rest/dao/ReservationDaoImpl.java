@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
+
 public class ReservationDaoImpl implements ReservationDao{
 
     @Autowired
@@ -19,8 +17,16 @@ public class ReservationDaoImpl implements ReservationDao{
     Session session = null;
     Transaction tx = null;
 
+    private static final ReservationDaoImpl instance = new ReservationDaoImpl();
+
+    public ReservationDaoImpl(){}
+
+    public static ReservationDaoImpl getInstance(){
+        return instance;
+    }
+
     @Override
-    public boolean addReservation(Reservation reservation) throws Exception {
+    public boolean add(Reservation reservation) throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         session.save(reservation);
@@ -31,7 +37,7 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
-    public boolean addReservations(List<Reservation> reservations) throws Exception {
+    public boolean addS(List<Reservation> reservations) throws Exception {
         session = sessionFactory.openSession();
 
         for(Reservation reservation:reservations) {
@@ -45,7 +51,7 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
-    public boolean updateReservation(Reservation reservation) throws Exception {
+    public boolean update(Reservation reservation) throws Exception {
         session = sessionFactory.openSession();
         Reservation reservation1;
         reservation1 = (Reservation) session.load(Reservation.class, reservation.getIdReserv());
@@ -59,7 +65,7 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
-    public boolean updateReservations(List<Reservation> reservations) throws Exception {
+    public boolean updateS(List<Reservation> reservations) throws Exception {
         session = sessionFactory.openSession();
         for(Reservation reservation:reservations) {
             Reservation reservation1;
@@ -75,7 +81,7 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
-    public Reservation getReservationById(int id) throws Exception {
+    public Reservation getById(int id) throws Exception {
         session = sessionFactory.openSession();
         Reservation reservation = (Reservation) session.load(Reservation.class, new Integer(id));
         tx = session.getTransaction();
@@ -86,7 +92,7 @@ public class ReservationDaoImpl implements ReservationDao{
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Reservation> getReservationList() throws Exception {
+    public List<Reservation> getList() throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         List<Reservation> reservationList = session.createCriteria(Reservation.class).list();
@@ -96,7 +102,7 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
-    public boolean deleteReservation(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
         session = sessionFactory.openSession();
         Object o = session.load(Reservation.class, id);
         tx = session.getTransaction();
@@ -107,7 +113,7 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
-    public boolean deleteAllReservations() throws Exception {
+    public boolean deleteAll() throws Exception {
         session = sessionFactory.openSession();
         tx = session.getTransaction();
         session.beginTransaction();

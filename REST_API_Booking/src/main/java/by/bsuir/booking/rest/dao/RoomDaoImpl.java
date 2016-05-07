@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
+
 public class RoomDaoImpl implements RoomDao{
 
     @Autowired
@@ -20,8 +18,16 @@ public class RoomDaoImpl implements RoomDao{
     Session session = null;
     Transaction tx = null;
 
+    private static final RoomDaoImpl instance = new RoomDaoImpl();
+
+    public RoomDaoImpl(){}
+
+    public static RoomDaoImpl getInstance(){
+        return instance;
+    }
+
     @Override
-    public boolean addRoom(Room room) throws Exception {
+    public boolean add(Room room) throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         session.save(room);
@@ -32,7 +38,7 @@ public class RoomDaoImpl implements RoomDao{
     }
 
     @Override
-    public boolean addRooms(List<Room> rooms) throws Exception {
+    public boolean addS(List<Room> rooms) throws Exception {
         session = sessionFactory.openSession();
 
         for(Room room:rooms) {
@@ -46,7 +52,7 @@ public class RoomDaoImpl implements RoomDao{
     }
 
     @Override
-    public boolean updateRoom(Room room) throws Exception {
+    public boolean update(Room room) throws Exception {
         session = sessionFactory.openSession();
         Room room1;
         room1 = (Room) session.load(Room.class, room.getIdRoom());
@@ -60,7 +66,7 @@ public class RoomDaoImpl implements RoomDao{
     }
 
     @Override
-    public boolean updateRooms(List<Room> rooms) throws Exception {
+    public boolean updateS(List<Room> rooms) throws Exception {
         session = sessionFactory.openSession();
         for(Room room:rooms) {
             Room room1;
@@ -76,7 +82,7 @@ public class RoomDaoImpl implements RoomDao{
     }
 
     @Override
-    public Room getRoomById(int id) throws Exception {
+    public Room getById(int id) throws Exception {
         session = sessionFactory.openSession();
         Room room = (Room) session.load(Room.class, new Integer(id));
         tx = session.getTransaction();
@@ -100,7 +106,7 @@ public class RoomDaoImpl implements RoomDao{
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Room> getRoomList() throws Exception {
+    public List<Room> getList() throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         List<Room> roomList = session.createCriteria(Room.class).list();
@@ -110,7 +116,7 @@ public class RoomDaoImpl implements RoomDao{
     }
 
     @Override
-    public boolean deleteRoom(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
         session = sessionFactory.openSession();
         Object o = session.load(Room.class, id);
         tx = session.getTransaction();
@@ -121,7 +127,7 @@ public class RoomDaoImpl implements RoomDao{
     }
 
     @Override
-    public boolean deleteAllRooms() throws Exception {
+    public boolean deleteAll() throws Exception {
         session = sessionFactory.openSession();
         tx = session.getTransaction();
         session.beginTransaction();

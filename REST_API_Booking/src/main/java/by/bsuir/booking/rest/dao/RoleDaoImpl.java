@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
 public class RoleDaoImpl implements RoleDao{
 
     @Autowired
@@ -19,8 +16,16 @@ public class RoleDaoImpl implements RoleDao{
     Session session = null;
     Transaction tx = null;
 
+    private static final RoleDaoImpl instance = new RoleDaoImpl();
+
+    public RoleDaoImpl(){}
+
+    public static RoleDaoImpl getInstance(){
+        return instance;
+    }
+
     @Override
-    public boolean addRole(Role role) throws Exception {
+    public boolean add(Role role) throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         session.save(role);
@@ -31,7 +36,7 @@ public class RoleDaoImpl implements RoleDao{
     }
 
     @Override
-    public boolean addRoles(List<Role> roles) throws Exception {
+    public boolean addS(List<Role> roles) throws Exception {
         session = sessionFactory.openSession();
 
         for(Role role:roles) {
@@ -45,7 +50,7 @@ public class RoleDaoImpl implements RoleDao{
     }
 
     @Override
-    public boolean updateRole(Role role) throws Exception {
+    public boolean update(Role role) throws Exception {
         session = sessionFactory.openSession();
         Role role1;
         role1 = (Role) session.load(Role.class, role.getIdRole());
@@ -59,7 +64,7 @@ public class RoleDaoImpl implements RoleDao{
     }
 
     @Override
-    public boolean updateRoles(List<Role> roles) throws Exception {
+    public boolean updateS(List<Role> roles) throws Exception {
         session = sessionFactory.openSession();
         for(Role role:roles) {
             Role user1;
@@ -75,7 +80,7 @@ public class RoleDaoImpl implements RoleDao{
     }
 
     @Override
-    public Role getRoleById(int id) throws Exception {
+    public Role getById(int id) throws Exception {
         session = sessionFactory.openSession();
         Role role = (Role) session.load(Role.class, new Integer(id));
         tx = session.getTransaction();
@@ -86,7 +91,7 @@ public class RoleDaoImpl implements RoleDao{
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Role> getRoleList() throws Exception {
+    public List<Role> getList() throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         List<Role> roleList = session.createCriteria(Role.class).list();
@@ -96,7 +101,7 @@ public class RoleDaoImpl implements RoleDao{
     }
 
     @Override
-    public boolean deleteRole(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
         session = sessionFactory.openSession();
         Object o = session.load(Role.class, id);
         tx = session.getTransaction();
@@ -107,7 +112,7 @@ public class RoleDaoImpl implements RoleDao{
     }
 
     @Override
-    public boolean deleteAllRoles() throws Exception {
+    public boolean deleteAll() throws Exception {
         session = sessionFactory.openSession();
         tx = session.getTransaction();
         session.beginTransaction();

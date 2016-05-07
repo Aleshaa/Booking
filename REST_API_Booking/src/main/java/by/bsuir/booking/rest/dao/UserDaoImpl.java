@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
 public class UserDaoImpl implements UserDao {
     @Autowired
     SessionFactory sessionFactory;
@@ -19,8 +16,16 @@ public class UserDaoImpl implements UserDao {
     Session session = null;
     Transaction tx = null;
 
+    private static final UserDaoImpl instance = new UserDaoImpl();
+
+    public UserDaoImpl(){}
+
+    public static UserDaoImpl getInstance(){
+        return instance;
+    }
+
     @Override
-    public boolean addUser(User user) throws Exception {
+    public boolean add(User user) throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         session.save(user);
@@ -31,7 +36,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean addUsers(List<User> users) throws Exception {
+    public boolean addS(List<User> users) throws Exception {
         session = sessionFactory.openSession();
 
         for(User user:users) {
@@ -45,7 +50,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean updateUser(User user) throws Exception {
+    public boolean update(User user) throws Exception {
         session = sessionFactory.openSession();
         User user1;
         user1 = (User) session.load(User.class, user.getIdUser());
@@ -59,7 +64,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean updateUsers(List<User> users) throws Exception {
+    public boolean updateS(List<User> users) throws Exception {
         session = sessionFactory.openSession();
         for(User user:users) {
             User user1;
@@ -75,7 +80,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(int id) throws Exception {
+    public User getById(int id) throws Exception {
         session = sessionFactory.openSession();
         User user = (User) session.load(User.class, new Integer(id));
         tx = session.getTransaction();
@@ -99,7 +104,7 @@ public class UserDaoImpl implements UserDao {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<User> getUserList() throws Exception {
+    public List<User> getList() throws Exception {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
         List<User> userList = session.createCriteria(User.class).list();
@@ -109,7 +114,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean deleteUser(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
         session = sessionFactory.openSession();
         Object o = session.load(User.class, id);
         tx = session.getTransaction();
@@ -120,7 +125,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean deleteAllUsers() throws Exception {
+    public boolean deleteAll() throws Exception {
         session = sessionFactory.openSession();
         tx = session.getTransaction();
         session.beginTransaction();

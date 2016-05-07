@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
 public class PictureServicesImpl implements PictureServices {
 
     @Autowired
@@ -16,27 +13,27 @@ public class PictureServicesImpl implements PictureServices {
 
     @Override
     public boolean addPicture(Picture pic) throws Exception {
-        return pictureDao.addPicture(pic);
+        return pictureDao.add(pic);
     }
 
     @Override
     public boolean addPictures(List<Picture> pictures) throws Exception {
-        return pictureDao.addPictures(pictures);
+        return pictureDao.addS(pictures);
     }
 
     @Override
     public boolean updatePicture(Picture picture) throws Exception {
-        return pictureDao.updatePicture(picture);
+        return pictureDao.update(picture);
     }
 
     @Override
     public boolean updatePictures(List<Picture> pictures) throws Exception {
-        return pictureDao.updatePictures(pictures);
+        return pictureDao.updateS(pictures);
     }
 
     @Override
     public Picture getPictureById(int id) throws Exception {
-        return pictureDao.getPictureById(id);
+        return pictureDao.getById(id);
     }
 
     @Override
@@ -46,16 +43,16 @@ public class PictureServicesImpl implements PictureServices {
 
     @Override
     public List<Picture> getPictureList() throws Exception {
-        return pictureDao.getPictureList();
+        return pictureDao.getList();
     }
 
     @Override
     public boolean deletePicture(int id) throws Exception {
-        return pictureDao.deletePicture(id);
+        return pictureDao.delete(id);
     }
 
     @Override
     public boolean deleteAllPictures() throws Exception {
-        return pictureDao.deleteAllPictures();
+        return pictureDao.deleteAll();
     }
 }

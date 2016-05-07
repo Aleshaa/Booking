@@ -5,9 +5,6 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-/**
- * Created by User on 09.04.2016.
- */
 @Entity
 @Table(name = "Check_r")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

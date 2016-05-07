@@ -1,5 +1,6 @@
 package by.bsuir.booking.rest.model;
 
+import by.bsuir.booking.rest.observer.Observer;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,13 +11,12 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 
-/**
- * Created by User on 09.04.2016.
- */
+
 @Entity
 @Table(name = "User")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class User implements Serializable {
+public class User implements Serializable, Observer {
+
     private int idUser;
     private int idRole;
     private String secondName;
@@ -245,4 +245,5 @@ public class User implements Serializable {
     public void setRoleByIdRole(Role roleByIdRole) {
         this.roleByIdRole = roleByIdRole;
     }
+
 }

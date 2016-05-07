@@ -1,20 +1,20 @@
 package by.bsuir.booking.rest.model;
 
+import by.bsuir.booking.rest.observer.Observers;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Collection;
 
-/**
- * Created by User on 09.04.2016.
- */
 @Entity
 @Table(name = "Role")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Role {
     private int idRole;
     private String nameRole;
+
+    Observers observers = new Observers();
 
     public Role() {
         this.nameRole = "";
@@ -31,6 +31,7 @@ public class Role {
 
     public void setIdRole(int idRole) {
         this.idRole = idRole;
+        observers.notifyObjectModified(this);
     }
 
     @Basic
@@ -41,6 +42,7 @@ public class Role {
 
     public void setNameRole(String nameRole) {
         this.nameRole = nameRole;
+        observers.notifyObjectModified(this);
     }
 
     @Override

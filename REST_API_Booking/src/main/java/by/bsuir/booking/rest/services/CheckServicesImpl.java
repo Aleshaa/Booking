@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
 public class CheckServicesImpl implements CheckServices{
 
     @Autowired
@@ -16,41 +13,41 @@ public class CheckServicesImpl implements CheckServices{
 
     @Override
     public boolean addCheck(Check_r check) throws Exception {
-        return checkDao.addCheck(check);
+        return checkDao.add(check);
     }
 
     @Override
     public boolean addChecks(List<Check_r> checks) throws Exception {
-        return checkDao.addChecks(checks);
+        return checkDao.addS(checks);
     }
 
     @Override
     public boolean updateCheck(Check_r check) throws Exception {
-        return checkDao.updateCheck(check);
+        return checkDao.update(check);
     }
 
     @Override
     public boolean updateChecks(List<Check_r> checks) throws Exception {
-        return checkDao.updateChecks(checks);
+        return checkDao.updateS(checks);
     }
 
     @Override
     public Check_r getCheckById(int id) throws Exception {
-        return checkDao.getCheckById(id);
+        return checkDao.getById(id);
     }
 
     @Override
     public List<Check_r> getCheckList() throws Exception {
-        return checkDao.getCheckList();
+        return checkDao.getList();
     }
 
     @Override
     public boolean deleteCheck(int id) throws Exception {
-        return checkDao.deleteCheck(id);
+        return checkDao.delete(id);
     }
 
     @Override
     public boolean deleteAllChecks() throws Exception {
-        return checkDao.deleteAllChecks();
+        return checkDao.deleteAll();
     }
 }

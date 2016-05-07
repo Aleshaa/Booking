@@ -4,17 +4,14 @@ import by.bsuir.booking.rest.model.User;
 
 import java.util.List;
 
-/**
- * Created by User on 11.04.2016.
- */
-public interface UserDao {
-    public boolean addUser(User user) throws Exception;
-    public boolean addUsers(List<User> users) throws Exception;
-    public boolean updateUser(User user) throws Exception;
-    public boolean updateUsers(List<User> users) throws Exception;
-    public User getUserById(int id) throws Exception;
+public interface UserDao extends IDAO<User>{
+    public boolean add(User user) throws Exception;
+    public boolean addS(List<User> users) throws Exception;
+    public boolean update(User user) throws Exception;
+    public boolean updateS(List<User> users) throws Exception;
+    public User getById(int id) throws Exception;
     public User getUserByName(String name) throws Exception;
-    public List<User> getUserList() throws Exception;
-    public boolean deleteUser(int id) throws Exception;
-    public boolean deleteAllUsers() throws Exception;
+    public List<User> getList() throws Exception;
+    public boolean delete(int id) throws Exception;
+    public boolean deleteAll() throws Exception;
 }
