@@ -62,7 +62,7 @@ public class TRListController {
             }
         }
 
-        return "redirect: trList";
+        return "redirect:/trList";
     }
 
     @RequestMapping(value = "/trAdd", method = RequestMethod.POST)
@@ -70,7 +70,7 @@ public class TRListController {
 
         typeroomService.save(trForm);
 
-        return "redirect: trList";
+        return "redirect:/trList";
     }
 
     @RequestMapping(value = "/deleteTR", method = RequestMethod.GET)

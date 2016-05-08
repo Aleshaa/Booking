@@ -53,7 +53,7 @@ public class UserController {
             model.addAttribute("error", "Неверный логин или пароль");
 
         if (logout != null)
-            model.addAttribute("message", "Вход выполнен успешно");
+            model.addAttribute("message", "Выход выполнен успешно");
 
         return "login";
     }

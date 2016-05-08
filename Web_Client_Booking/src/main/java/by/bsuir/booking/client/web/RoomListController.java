@@ -53,7 +53,7 @@ public class RoomListController {
         roomForm.setTyperoomByIdTRoomTR(tr);
         roomService.update(roomForm);
 
-        return "redirect: roomList";
+        return "redirect:/roomList";
     }
 
     @RequestMapping(value = "/roomAdd", method = RequestMethod.GET)
@@ -73,7 +73,7 @@ public class RoomListController {
         roomForm.setTyperoomByIdTRoomTR(tr);
         roomService.save(roomForm);
 
-        return "redirect: roomList";
+        return "redirect:/roomList";
     }
 
     @RequestMapping(value = "/deleteRoom", method = RequestMethod.GET)

@@ -67,7 +67,7 @@ public class ReservationListController {
         reservForm.setRoomByIdRoomR(room);
         reservationService.update(reservForm);
 
-        return "redirect: reservList";
+        return "redirect:/reservList";
     }
 
     @RequestMapping(value = "/reservAdd", method = RequestMethod.GET)
@@ -88,7 +88,7 @@ public class ReservationListController {
         reservForm.setRoomByIdRoomR(room);
         reservationService.save(reservForm);
 
-        return "redirect: reservList";
+        return "redirect:/reservList";
     }
 
     @RequestMapping(value = "/deleteReserv", method = RequestMethod.GET)
