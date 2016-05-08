@@ -111,6 +111,10 @@
     $("#wrapper").toggleClass("toggled");
   });
 </script>
+<br><br/>
+<br><br/>
+<br><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
 <!-- /container -->
 <%@include file="footer.jsp"%>
 </body>

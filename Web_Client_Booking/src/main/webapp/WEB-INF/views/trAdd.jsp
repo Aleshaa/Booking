@@ -70,15 +70,19 @@
       </div>
     </spring:bind>
     <input type="hidden" name="pic" value="${trForm.pictureByIdPicture}">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Сохранить</button>
     <br><br/>
     <div class="text-center">
-      <a href="${contextPath}/trList" class="btn btn-primary" role="button">Cancel</a>
+      <a href="${contextPath}/trList" class="btn btn-primary" role="button">Отмена</a>
     </div>
   </form:form>
 
 </div>
 <!-- /container -->
+<br><br/>
+<br><br/>
+<br><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
 <%@include file="footer.jsp"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

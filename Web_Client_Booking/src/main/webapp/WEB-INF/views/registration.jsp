@@ -129,10 +129,14 @@
 
             </div>
         </spring:bind>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
     </form:form>
 
 </div>
+<br><br/>
+<br><br/>
+<br><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
 <%@include file="footer.jsp"%>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -52,6 +52,10 @@
     </form>
 
 </div>
+<br><br/>
+<br><br/>
+<br><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
 <%@include file="footer.jsp"%>
 
 <!-- /container -->

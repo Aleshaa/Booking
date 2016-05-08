@@ -175,7 +175,7 @@ public class User implements Serializable {
     }
     public void setCash(BigDecimal cash) {
         this.cash = cash;
-        System.out.println("Constructor User: cash = " + this.cash);
+        System.out.println("setCash User: cash = " + this.cash);
     }
 
     @Override

@@ -67,7 +67,7 @@ public class ReservController {
                 dateFor = dateFor + "-0" + dayFor;
             }
             else {
-                dateFor = dateFor + "-" + dateFor;
+                dateFor = dateFor + "-" + dayFor;
             }
             model.addAttribute("dateFrom", dateFrom);
             model.addAttribute("dateFor", dateFor);
@@ -110,8 +110,10 @@ public class ReservController {
             List<Room> freeRooms = roomService.getFreeRooms(dateFrom,dateFor);
             for (Room room:freeRooms){
                 if(tr.getIdTRoom()==room.getIdTRoom()){
+                    System.out.println("User cash before set in reserv: " + user.getCash());
+                    System.out.println(user.getCash().doubleValue() + "-" + count * tr.getPrice().doubleValue() * 0.5 + "=" + BigDecimal.valueOf(user.getCash().doubleValue() - count * tr.getPrice().doubleValue() * 0.5));
                     user.setCash(BigDecimal.valueOf(user.getCash().doubleValue() - count * tr.getPrice().doubleValue() * 0.5));
-                    System.out.println(user.getCash());
+                    System.out.println("User cash after set in reserv: " + user.getCash());
                     Reservation reservation = new Reservation(0,user.getIdUser(),room.getIdRoom(),ParseUtil.parseStringToDate(dateFrom),ParseUtil.parseStringToDate(dateFor), (byte)0, (float)0.5, (byte)0, room, user);
                     userService.update(user);
                     reservationService.save(reservation);
@@ -128,9 +130,9 @@ public class ReservController {
             }
         }
         else{
+            model.addAttribute("count", -1);
             model.addAttribute("message", "Недостаточно средств");
         }
-        //typeroomService.delTTypeRoom(TrID);
         return "reserv";
     }
 }

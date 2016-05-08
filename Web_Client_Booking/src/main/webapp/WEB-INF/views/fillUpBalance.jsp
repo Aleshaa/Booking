@@ -52,6 +52,10 @@
           <button type="submit" class="btn btn-default">Пополнить</button>
         </form:form>
 </div>
+<br><br/>
+<br><br/>
+<br><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
 <%@include file="footer.jsp"%>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

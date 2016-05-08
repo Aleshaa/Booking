@@ -122,7 +122,7 @@
           <form:form action="reserv" method="get" class="navbar-form navbar-left" role="search">
             <div class="form-group">
                <label> C: </label>
-               <input class="form-control" id="dayFrom" name="dayFrom" value="5" type="number" min="1" max="31" required/>
+               <input class="form-control" id="dayFrom" name="dayFrom" value="9" type="number" min="1" max="31" required/>
                <select class="form-control" id="monthFrom" name="monthFrom">
                     <option value="05" selected>Май</option>
                     <option value="06">Июнь</option>
