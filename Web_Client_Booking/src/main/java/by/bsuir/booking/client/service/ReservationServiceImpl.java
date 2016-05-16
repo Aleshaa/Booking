@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
-    public static final String SERVER_URI_RESERVATION = "http://booking.mycloud.by/rest/reservation";
+    public static final String SERVER_URI_RESERVATION = "http://localhost:8080/rest/reservation";
 
     @Override
     public void save(Reservation reservation) throws IOException {

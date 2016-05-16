@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class Check_rServiceImpl implements Check_rService{
 
-    public static final String SERVER_URI_CHECK = "http://booking.mycloud.by/rest/check";
+    public static final String SERVER_URI_CHECK = "http://localhost:8080/rest/check";
 
     @Override
     public void save(Check_r check_r) throws IOException {

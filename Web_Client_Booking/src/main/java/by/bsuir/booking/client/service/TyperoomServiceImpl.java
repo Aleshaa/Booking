@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class TyperoomServiceImpl implements TyperoomService {
 
-    public static final String SERVER_URI_TR = "http://booking.mycloud.by/rest/";
+    public static final String SERVER_URI_TR = "http://localhost:8080/rest/";
 
     @Autowired
     PictureService pictureService;

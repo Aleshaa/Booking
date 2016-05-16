@@ -130,8 +130,7 @@ CREATE TABLE IF NOT EXISTS `Check_r` (
   `Payment` DECIMAL(64,2) NOT NULL,
   PRIMARY KEY (`idCheck`),
   UNIQUE INDEX `idCheck_UNIQUE` (`idCheck` ASC),
-  UNIQUE INDEX `idReserv_UNIQUE` (`idReserv` ASC),
-  CONSTRAINT `idReserv` FOREIGN KEY (`idReserv`) REFERENCES `Reservation` (`idReserv`) ON UPDATE CASCADE
+  CONSTRAINT `idReserv` FOREIGN KEY (`idReserv`) REFERENCES `Reservation` (`idReserv`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

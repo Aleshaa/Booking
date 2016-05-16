@@ -16,7 +16,7 @@ import java.text.ParseException;
 @Service
 public class PictureServiceImpl implements PictureService {
 
-    public static final String SERVER_URI_PIC = "http://booking.mycloud.by/rest/picture";
+    public static final String SERVER_URI_PIC = "http://localhost:8080/rest/picture";
 
 
     @Override

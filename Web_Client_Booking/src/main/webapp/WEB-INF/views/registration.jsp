@@ -38,6 +38,7 @@
     <form:form method="POST" modelAttribute="userForm" class="form-signin">
         <h2 class="form-signin-heading">Регистрация</h2>
         <spring:bind path="username">
+            <p>Имя пользователя</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="username" class="form-control" placeholder="Username"
                             autofocus="true"></form:input>
@@ -46,6 +47,7 @@
         </spring:bind>
 
         <spring:bind path="password">
+            <p>Пароль</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
                 <form:errors path="password"></form:errors>
@@ -53,6 +55,7 @@
         </spring:bind>
 
         <spring:bind path="passwordConfirm">
+            <p>Повторите пароль</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="passwordConfirm" class="form-control"
                             placeholder="Confirm your password"></form:input>
@@ -60,6 +63,7 @@
             </div>
         </spring:bind>
         <spring:bind path="secondName">
+            <p>Фамилия</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="secondName" class="form-control" placeholder="Фамилия"
                             autofocus="true"></form:input>
@@ -67,6 +71,7 @@
             </div>
         </spring:bind>
         <spring:bind path="firstName">
+            <p>Имя</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="firstName" class="form-control" placeholder="Имя"
                             autofocus="true"></form:input>
@@ -74,6 +79,7 @@
             </div>
         </spring:bind>
         <spring:bind path="patronymic">
+            <p>Отчество</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="patronymic" class="form-control" placeholder="Отчество"
                             autofocus="true"></form:input>
@@ -81,6 +87,7 @@
             </div>
         </spring:bind>
         <spring:bind path="dob">
+            <p>Дата рождения(гггг-ММ-дд)</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="dob" class="form-control" placeholder="Дата рождения(гггг-ММ-дд)"
                             autofocus="true"></form:input>
@@ -88,16 +95,17 @@
             </div>
         </spring:bind>
         <spring:bind path="sex">
+            <p>Пол</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:select path="sex" class="form-control">
                     <form:option value="0">Мужской </form:option>
                     <form:option value="1">Женский</form:option>
                 </form:select>
                 <form:errors path="sex"></form:errors>
-
             </div>
         </spring:bind>
         <spring:bind path="passportSeries">
+            <p>Серия паспорта</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="passportSeries" class="form-control" placeholder="Серия паспорта"
                             autofocus="true"></form:input>
@@ -106,6 +114,7 @@
             </div>
         </spring:bind>
         <spring:bind path="passportN">
+            <p>Номер паспорта</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="passportN" class="form-control" placeholder="Номер паспорта"
                             autofocus="true"></form:input>
@@ -114,6 +123,7 @@
             </div>
         </spring:bind>
         <spring:bind path="identificationN">
+            <p>Идентификационный номер паспорта</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="identificationN" class="form-control" placeholder="Идентификационный номер паспорта"
                             autofocus="true"></form:input>
@@ -122,6 +132,7 @@
             </div>
         </spring:bind>
         <spring:bind path="cash">
+            <p>Количество денег</p>
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="cash" class="form-control" placeholder="Деньги"
                             autofocus="true"></form:input>
