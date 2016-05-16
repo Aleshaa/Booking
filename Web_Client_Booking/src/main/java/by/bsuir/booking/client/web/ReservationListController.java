@@ -104,11 +104,10 @@ public class ReservationListController {
         Reservation reservation = reservationService.getReservationByID(ReservID);
         reservation.setArrived((byte) 1);
         reservation.setComplete((byte) 1);
-        long day = (reservation.getCheckOutDateR().getTime() - reservation.getCheckInDateR().getTime())/24*3600*1000;
-        System.out.println(day);
+        long day = (reservation.getCheckOutDateR().getTime() - reservation.getCheckInDateR().getTime())/(24*3600*1000);
         User user = userService.getByID(reservation.getIdUser());
-        user.setCash(BigDecimal.valueOf(user.getCash().doubleValue() - day * reservation.getRoomByIdRoomR().getTyperoomByIdTRoomTR().getPrice().doubleValue() * (1 - (double) reservation.getInterestPayment())));
-        Check_r check_r = new Check_r(0,reservation.getIdReserv(), BigDecimal.valueOf((1-(double) reservation.getInterestPayment()) * reservation.getRoomByIdRoomR().getTyperoomByIdTRoomTR().getPrice().doubleValue()), reservation);
+        user.setCash(BigDecimal.valueOf(user.getCash().doubleValue() - day * reservation.getRoomByIdRoomR().getTyperoomByIdTRoomTR().getPrice().doubleValue() * (1 - reservation.getInterestPayment())));
+        Check_r check_r = new Check_r(0,reservation.getIdReserv(), BigDecimal.valueOf((1-(double) reservation.getInterestPayment()) * day * reservation.getRoomByIdRoomR().getTyperoomByIdTRoomTR().getPrice().doubleValue()), reservation);
         reservationService.update(reservation);
         userService.update(user);
         check_rService.save(check_r);
